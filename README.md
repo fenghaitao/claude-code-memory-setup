@@ -318,36 +318,79 @@ Install the **"Export Claude Chat to Markdown"** browser extension for Chrome/Ed
 
 ```bash
 pip install graphifyy
-graphify install
+graphify install --platform claude
 ```
 
-`graphify install` creates the skill at `~/.claude/skills/graphify/SKILL.md`.
+`graphify install --platform claude` creates the skill at `~/.claude/skills/graphify/SKILL.md`. Other platforms are also supported (`cursor`, `codex`, `opencode`, etc.).
+
+**1.5. Set up API key (required for semantic extraction):**
+
+Graphify needs an LLM API key from Anthropic or Moonshot (Kimi) for semantic extraction. Export one before running:
+
+```bash
+export ANTHROPIC_API_KEY="your-key-here"
+# or
+export MOONSHOT_API_KEY="your-key-here"
+```
+
+If you want to skip LLM costs entirely, use AST-only mode:
+
+```bash
+graphify extract . --out ./graphify-out --no-cluster
+```
+
+This generates a structural graph without semantic edges.
 
 **2. Generate the graph:**
 
-From your project root:
+Graphify has two execution paths and the original `--obsidian*` flags only work on one of them. Pick the form that matches how you're invoking it:
 
-```bash
-# Full pipeline + Obsidian notes in the centralized vault
-graphify . --obsidian --obsidian-dir ~/vault/graphify/project-name
+**A. Inside Claude Code (skill — recommended for this guide):**
+
+```
+/graphify . --obsidian --obsidian-dir ~/vault/graphify/project-name
 ```
 
-Generated output:
+This runs the `/graphify` slash command, which the skill at `~/.claude/skills/graphify/SKILL.md` parses. The skill calls `graphify.export.to_obsidian()` in Python directly, so `--obsidian` and `--obsidian-dir` are recognized here — they're not part of the headless shell parser.
+
+**B. From the terminal / CI (headless CLI):**
+
+```bash
+graphify extract . --out ./graphify-out
+```
+
+The headless CLI uses subcommands (`extract`, `update`, `watch`, `tree`) and does **not** expose `--obsidian` / `--obsidian-dir` / `--wiki` / `--mode deep`. If you want Obsidian integration from the terminal, symlink the output directory into your vault after extraction:
+
+```bash
+ln -s $(pwd)/graphify-out ~/vault/graphify/project-name/graphify-out
+```
+
+Generated output (varies by path and flags):
 
 ```
 your-project/
 └── graphify-out/
-    ├── graph.json          # queryable graph (Claude Code uses this)
-    ├── graph.html          # interactive visualization (open in browser)
-    ├── GRAPH_REPORT.md     # god nodes, connections, metrics
-    ├── wiki/               # Wikipedia-style articles (agent navigation)
+    ├── graph.json          # queryable graph (always)
+    ├── graph.html          # interactive viz (skill auto-generates; headless: see step 3)
+    ├── GRAPH_REPORT.md     # god nodes, connections, metrics (always)
+    ├── wiki/               # Wikipedia-style articles (skill form with --wiki only)
     └── cache/              # SHA256 cache
 
-~/vault/graphify/project-name/
-    └── (Obsidian notes)    # each function/module as a node in graph view
+~/vault/graphify/project-name/    # only when skill form was given --obsidian
+    └── (Obsidian notes)          # one note per function/module
 ```
 
-**3. Update .gitignore:**
+**3. Generate interactive visualization (headless only):**
+
+The skill auto-generates `graph.html` during extraction. For the headless path, run the visualization as a separate step:
+
+```bash
+graphify tree --graph ./graphify-out/graph.json --output ./graphify-out/GRAPH_TREE.html
+```
+
+Open the HTML file in a browser to explore the graph interactively.
+
+**4. Update .gitignore:**
 
 ```gitignore
 # Graphify
@@ -356,7 +399,7 @@ graphify-out/cache/
 
 Keep `graph.json` and `GRAPH_REPORT.md` versioned — they're useful for the team.
 
-**4. Add to the project's CLAUDE.md:**
+**5. Add to the project's CLAUDE.md:**
 
 Append to the CLAUDE.md at the repository root:
 
@@ -372,7 +415,8 @@ Append to the CLAUDE.md at the repository root:
 
 ### When to rebuild the graph
 - After structural changes (new modules, major refactors)
-- Command: `graphify . --update` (only processes modified files)
+- Headless: `graphify update .` (only processes modified files)
+- Skill: `/graphify . --update` (same behavior, runs through the skill — also accepts `--obsidian` to refresh the vault)
 - The graph is persistent — NO need to rebuild every session
 
 ### Do NOT
@@ -380,7 +424,7 @@ Append to the CLAUDE.md at the repository root:
 - Don't re-read the entire codebase if the graph already has the information
 ```
 
-**5. Add to the vault's CLAUDE.md:**
+**6. Add to the vault's CLAUDE.md:**
 
 ```markdown
 ## Graphify (Codebase Maps)
@@ -395,7 +439,7 @@ Append to the CLAUDE.md at the repository root:
 - Filter by `-path:graphify` to hide code nodes
 ```
 
-**6. Git Hook (optional):**
+**7. Git Hook (optional):**
 
 Automatically rebuilds the graph on every commit:
 
@@ -403,36 +447,57 @@ Automatically rebuilds the graph on every commit:
 graphify hook install
 ```
 
-**7. Watch Mode (optional):**
+**8. Watch Mode (optional):**
 
-Auto-rebuild on file save (run in a separate terminal):
+Auto-rebuild on file save. Pick the form that matches how you invoke graphify.
+
+Headless (separate terminal):
 
 ```bash
-graphify . --watch
+graphify watch .
+```
+
+Skill (inside Claude Code):
+
+```
+/graphify . --watch
 ```
 
 ### Useful Commands
 
+The table below lists the **headless CLI** subcommands you'd run in a terminal. Inside Claude Code, the same operations are available via the `/graphify` slash form documented in `~/.claude/skills/graphify/SKILL.md` — that form additionally supports `--obsidian`, `--obsidian-dir`, `--wiki`, and `--mode deep` (which the headless parser doesn't expose).
+
 | Command | Description |
 |---------|-------------|
-| `graphify .` | Full pipeline on current directory |
-| `graphify ./src` | Scan specific folder |
-| `graphify . --update` | Only process modified files |
-| `graphify . --mode deep` | Semantic extraction (uses LLM, costs tokens) |
-| `graphify . --watch` | Auto-rebuild on save |
+| `graphify extract .` | Full extraction on current directory |
+| `graphify extract ./src` | Scan specific folder |
+| `graphify update .` | Only process modified files |
+| `graphify watch .` | Auto-rebuild on save |
 | `graphify query "question"` | Query the graph directly |
-| `open graphify-out/graph.html` | Open interactive visualization |
+| `graphify explain "NodeName"` | Plain-language explanation of a node |
+| `graphify path "A" "B"` | Shortest path between two nodes |
+| `graphify tree --graph ./graphify-out/graph.json --output ./graphify-out/GRAPH_TREE.html` | Generate interactive visualization |
+| `open graphify-out/graph.html` | Open interactive visualization (skill-generated) or `GRAPH_TREE.html` (headless) |
 
 ### Adding New Projects
 
-With a centralized vault, each project is just a subfolder:
+With a centralized vault, each project is just a subfolder. Same two paths as the initial setup.
+
+Skill (inside Claude Code):
+
+```
+/graphify ~/another-project --obsidian --obsidian-dir ~/vault/graphify/another-project
+```
+
+Headless (terminal):
 
 ```bash
 cd ~/another-project
-graphify . --obsidian --obsidian-dir ~/vault/graphify/another-project
+graphify extract . --out ./graphify-out
+ln -s $(pwd)/graphify-out ~/vault/graphify/another-project/graphify-out
 ```
 
-Notes automatically appear in Obsidian's graph view alongside everything else.
+Drop the `ln -s` line if you don't need Obsidian to pick up the graph. Notes appear in Obsidian's graph view alongside everything else.
 
 ---
 
@@ -539,7 +604,7 @@ Check that the project's CLAUDE.md has the "Context Navigation" section and that
 Grant Full Disk Access to your terminal in System Preferences → Privacy & Security.
 
 **Graphify doesn't generate wiki:**
-The wiki requires semantic edges. In AST-only mode, use `graphify query "question"` or run `--mode deep` (costs API tokens).
+The `wiki/` folder is only produced by the **skill form with `--wiki`** (`/graphify . --wiki` inside Claude Code). The headless `graphify extract` subcommand doesn't expose `--wiki`. From the terminal, use `graphify query "question"` against `graph.json` instead, or run the skill form if you need the Wikipedia-style articles.
 
 **Files with parentheses in name:**
 Graphify generates notes like `myFunction().md`. Obsidian may struggle indexing files with `()` in the name. If needed, batch rename:
@@ -548,9 +613,15 @@ cd ~/vault/graphify/project
 for f in *"("*; do mv "$f" "$(echo "$f" | sed 's/[()]//g')"; done
 ```
 **Unknown Command error in graphify:**
-If an `unknown command '.'` error occurs in the `Generate the graph` step, in newer versions the `update` parameter should be placed immediately after `graphify`, resulting in:
+If `graphify .` errors with `unknown command '.'`, you're running the **headless CLI** — which requires a subcommand (`extract`, `update`, `watch`, etc.) before the path. Either use the headless form:
 ```bash
-graphify update . --obsidian --obsidian-dir ~/vault/graphify/project-name
+graphify extract . --out ./graphify-out
+# or, to refresh an existing graph:
+graphify update .
+```
+Or, inside Claude Code, use the **skill form** with the leading slash — which routes through the `/graphify` skill rather than the shell parser and supports the full flag set (`--obsidian`, `--obsidian-dir`, `--wiki`, `--mode deep`, etc.):
+```
+/graphify . --obsidian --obsidian-dir ~/vault/graphify/project-name
 ```
 
 ---
