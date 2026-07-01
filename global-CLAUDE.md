@@ -72,7 +72,7 @@ loc=<Lnn>]`; open that `src` at that `loc` — `Read` it for code, or
 
 ### Querying L2 — raw, reader depends on domain
 - **Repo:** `Read` the `src` file at the `loc` graphify named. Don't grep blindly.
-- **Memory:** Obsidian CLI via `~/claude-code-memory-setup/obsidian-query.sh`
+- **Memory:** Obsidian CLI via `~/claude-code-memory-setup/scripts/obsidian-query.sh`
   (sets the session env the bare `obsidian` command needs):
   - `obsidian-query.sh vault="vault" search:context query="<term>"` — matching lines
   - `obsidian-query.sh vault="vault" read file="<name>"` — read a note

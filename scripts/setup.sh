@@ -94,7 +94,7 @@ done
 # ---------------------------------------------------------------------------
 # 4. Make helper scripts executable
 # ---------------------------------------------------------------------------
-chmod +x "$REPO/obsidian-query.sh" 2>/dev/null || true
+chmod +x "$REPO/scripts/obsidian-query.sh" 2>/dev/null || true
 
 echo
 echo "Done. Start a new Claude Code session to load ~/.claude/CLAUDE.md."

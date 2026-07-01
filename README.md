@@ -51,9 +51,9 @@ line "pointer" in the global config; `/load-memory` is the explicit reload.
 
 ```
 global-CLAUDE.md         # the whole model above, imported into ~/.claude/CLAUDE.md
-obsidian-query.sh        # wrapper for the Obsidian CLI (L2 raw reader for memory)
 scripts/
 ├── setup.sh             # idempotent installer (wires everything up)
+├── obsidian-query.sh    # wrapper for the Obsidian CLI (L2 raw reader for memory)
 ├── claude_to_obsidian.py    # render/import a session transcript into the vault
 └── sync_claude_obsidian.sh  # optional bulk chat-import automation
 skills/
@@ -154,8 +154,8 @@ graphify explain "<node>"      # one node
 graphify path "<A>" "<B>"      # shortest path
 
 # L2 — raw memory notes (needs Obsidian running)
-./obsidian-query.sh vault="vault" search:context query="<term>"
-./obsidian-query.sh vault="vault" read file="<note>"
+./scripts/obsidian-query.sh vault="vault" search:context query="<term>"
+./scripts/obsidian-query.sh vault="vault" read file="<note>"
 ```
 
 ### Promoting memory → repo (`graphify link-docs`)
