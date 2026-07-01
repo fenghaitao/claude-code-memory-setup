@@ -65,12 +65,29 @@ install_template "$REPO/vault/.graphifyignore" "$VAULT/.graphifyignore"
 
 # ---------------------------------------------------------------------------
 # 3. Skills — symlink every skill in repo/skills/ into ~/.claude/skills/
+#
+# Non-destructive: if the target already points somewhere OUTSIDE this repo
+# (e.g. obsidian-cli linked to your upstream ~/obsidian-skills), leave it — the
+# repo only vendors those as a fresh-machine fallback and must not hijack your
+# maintained upstream. Repo-owned skills (save-memory, load-memory) have no such
+# link, so they install normally.
 # ---------------------------------------------------------------------------
 mkdir -p "$HOME/.claude/skills"
 for skill_dir in "$REPO"/skills/*/; do
   [[ -d "$skill_dir" ]] || continue
   name="$(basename "$skill_dir")"
-  ln -sfn "${skill_dir%/}" "$HOME/.claude/skills/$name"
+  target="$HOME/.claude/skills/$name"
+  if [[ -L "$target" ]]; then
+    current="$(readlink "$target")"
+    if [[ "$current" != "$REPO/"* ]]; then
+      echo "[skip]     ~/.claude/skills/$name -> $current (external; left as-is)"
+      continue
+    fi
+  elif [[ -e "$target" ]]; then
+    echo "[skip]     ~/.claude/skills/$name exists (not a symlink; left as-is)"
+    continue
+  fi
+  ln -sfn "${skill_dir%/}" "$target"
   echo "[link]     ~/.claude/skills/$name -> ${skill_dir%/}"
 done
 
