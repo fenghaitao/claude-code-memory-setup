@@ -1,0 +1,638 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "claude_to_obsidian.py",
+      "file_type": "code",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "scripts_claude_to_obsidian",
+      "community": 2,
+      "norm_label": "claude_to_obsidian.py"
+    },
+    {
+      "label": "detect_origin()",
+      "file_type": "code",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L124",
+      "_origin": "ast",
+      "id": "scripts_claude_to_obsidian_detect_origin",
+      "community": 0,
+      "norm_label": "detect_origin()"
+    },
+    {
+      "label": "Path",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "path",
+      "community": 0,
+      "norm_label": "path"
+    },
+    {
+      "label": "extract_tags()",
+      "file_type": "code",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L138",
+      "_origin": "ast",
+      "id": "scripts_claude_to_obsidian_extract_tags",
+      "community": 6,
+      "norm_label": "extract_tags()"
+    },
+    {
+      "label": "strip_existing_frontmatter()",
+      "file_type": "code",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L154",
+      "_origin": "ast",
+      "id": "scripts_claude_to_obsidian_strip_existing_frontmatter",
+      "community": 8,
+      "norm_label": "strip_existing_frontmatter()"
+    },
+    {
+      "label": "build_frontmatter()",
+      "file_type": "code",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L172",
+      "_origin": "ast",
+      "id": "scripts_claude_to_obsidian_build_frontmatter",
+      "community": 5,
+      "norm_label": "build_frontmatter()"
+    },
+    {
+      "label": "collect_vault_notes()",
+      "file_type": "code",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L198",
+      "_origin": "ast",
+      "id": "scripts_claude_to_obsidian_collect_vault_notes",
+      "community": 2,
+      "norm_label": "collect_vault_notes()"
+    },
+    {
+      "label": "insert_wikilinks()",
+      "file_type": "code",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L214",
+      "_origin": "ast",
+      "id": "scripts_claude_to_obsidian_insert_wikilinks",
+      "community": 7,
+      "norm_label": "insert_wikilinks()"
+    },
+    {
+      "label": "process_file()",
+      "file_type": "code",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L244",
+      "_origin": "ast",
+      "id": "scripts_claude_to_obsidian_process_file",
+      "community": 0,
+      "norm_label": "process_file()"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L296",
+      "_origin": "ast",
+      "id": "scripts_claude_to_obsidian_main",
+      "community": 2,
+      "norm_label": "main()"
+    },
+    {
+      "label": "Detect whether the chat is from Claude Code or Claude Web.",
+      "file_type": "rationale",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L125",
+      "_origin": "ast",
+      "id": "scripts_claude_to_obsidian_rationale_125",
+      "community": 0,
+      "norm_label": "detect whether the chat is from claude code or claude web."
+    },
+    {
+      "label": "Extract tags via keyword matching in the content.",
+      "file_type": "rationale",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L139",
+      "_origin": "ast",
+      "id": "scripts_claude_to_obsidian_rationale_139",
+      "community": 6,
+      "norm_label": "extract tags via keyword matching in the content."
+    },
+    {
+      "label": "Remove existing frontmatter and return parsed fields + body.",
+      "file_type": "rationale",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L155",
+      "_origin": "ast",
+      "id": "scripts_claude_to_obsidian_rationale_155",
+      "community": 8,
+      "norm_label": "remove existing frontmatter and return parsed fields + body."
+    },
+    {
+      "label": "Build the YAML frontmatter block.",
+      "file_type": "rationale",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L178",
+      "_origin": "ast",
+      "id": "scripts_claude_to_obsidian_rationale_178",
+      "community": 5,
+      "norm_label": "build the yaml frontmatter block."
+    },
+    {
+      "label": "Collect names of all .md notes in the vault (without extension).",
+      "file_type": "rationale",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L199",
+      "_origin": "ast",
+      "id": "scripts_claude_to_obsidian_rationale_199",
+      "community": 2,
+      "norm_label": "collect names of all .md notes in the vault (without extension)."
+    },
+    {
+      "label": "Insert [[wikilinks]] for vault notes on first occurrence.",
+      "file_type": "rationale",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L215",
+      "_origin": "ast",
+      "id": "scripts_claude_to_obsidian_rationale_215",
+      "community": 7,
+      "norm_label": "insert [[wikilinks]] for vault notes on first occurrence."
+    },
+    {
+      "label": "Process a single exported .md file.",
+      "file_type": "rationale",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L253",
+      "_origin": "ast",
+      "id": "scripts_claude_to_obsidian_rationale_253",
+      "community": 0,
+      "norm_label": "process a single exported .md file."
+    },
+    {
+      "label": "obsidian-query.sh",
+      "file_type": "code",
+      "source_file": "scripts/obsidian-query.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "scripts_obsidian_query",
+      "community": 1,
+      "norm_label": "obsidian-query.sh"
+    },
+    {
+      "label": "obsidian-query.sh script",
+      "file_type": "code",
+      "source_file": "scripts/obsidian-query.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "home_hfeng1_claude_code_memory_setup_scripts_obsidian_query_sh__entry",
+      "community": 1,
+      "norm_label": "obsidian-query.sh script"
+    },
+    {
+      "label": "DISPLAY",
+      "file_type": "code",
+      "source_file": "scripts/obsidian-query.sh",
+      "source_location": "L17",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_obsidian_query_display",
+      "community": 1,
+      "norm_label": "display"
+    },
+    {
+      "label": "XDG_RUNTIME_DIR",
+      "file_type": "code",
+      "source_file": "scripts/obsidian-query.sh",
+      "source_location": "L18",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "scripts_obsidian_query_xdg_runtime_dir",
+      "community": 1,
+      "norm_label": "xdg_runtime_dir"
+    },
+    {
+      "label": "setup.sh",
+      "file_type": "code",
+      "source_file": "scripts/setup.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "scripts_setup",
+      "community": 3,
+      "norm_label": "setup.sh"
+    },
+    {
+      "label": "setup.sh script",
+      "file_type": "code",
+      "source_file": "scripts/setup.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "home_hfeng1_claude_code_memory_setup_scripts_setup_sh__entry",
+      "community": 3,
+      "norm_label": "setup.sh script"
+    },
+    {
+      "label": "install_template()",
+      "file_type": "code",
+      "source_file": "scripts/setup.sh",
+      "source_location": "L54",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "scripts_setup_install_template",
+      "community": 3,
+      "norm_label": "install_template()"
+    },
+    {
+      "label": "sync_claude_obsidian.sh",
+      "file_type": "code",
+      "source_file": "scripts/sync_claude_obsidian.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "scripts_sync_claude_obsidian",
+      "community": 4,
+      "norm_label": "sync_claude_obsidian.sh"
+    },
+    {
+      "label": "sync_claude_obsidian.sh script",
+      "file_type": "code",
+      "source_file": "scripts/sync_claude_obsidian.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "home_hfeng1_claude_code_memory_setup_scripts_sync_claude_obsidian_sh__entry",
+      "community": 4,
+      "norm_label": "sync_claude_obsidian.sh script"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L172",
+      "weight": 1.0,
+      "source": "scripts_claude_to_obsidian",
+      "target": "scripts_claude_to_obsidian_build_frontmatter",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L198",
+      "weight": 1.0,
+      "source": "scripts_claude_to_obsidian",
+      "target": "scripts_claude_to_obsidian_collect_vault_notes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L124",
+      "weight": 1.0,
+      "source": "scripts_claude_to_obsidian",
+      "target": "scripts_claude_to_obsidian_detect_origin",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L138",
+      "weight": 1.0,
+      "source": "scripts_claude_to_obsidian",
+      "target": "scripts_claude_to_obsidian_extract_tags",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L214",
+      "weight": 1.0,
+      "source": "scripts_claude_to_obsidian",
+      "target": "scripts_claude_to_obsidian_insert_wikilinks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L296",
+      "weight": 1.0,
+      "source": "scripts_claude_to_obsidian",
+      "target": "scripts_claude_to_obsidian_main",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L244",
+      "weight": 1.0,
+      "source": "scripts_claude_to_obsidian",
+      "target": "scripts_claude_to_obsidian_process_file",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L154",
+      "weight": 1.0,
+      "source": "scripts_claude_to_obsidian",
+      "target": "scripts_claude_to_obsidian_strip_existing_frontmatter",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L124",
+      "weight": 1.0,
+      "source": "scripts_claude_to_obsidian_detect_origin",
+      "target": "path",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L257",
+      "weight": 1.0,
+      "source": "scripts_claude_to_obsidian_process_file",
+      "target": "scripts_claude_to_obsidian_detect_origin",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L125",
+      "weight": 1.0,
+      "source": "scripts_claude_to_obsidian_rationale_125",
+      "target": "scripts_claude_to_obsidian_detect_origin",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L198",
+      "weight": 1.0,
+      "source": "scripts_claude_to_obsidian_collect_vault_notes",
+      "target": "path",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L244",
+      "weight": 1.0,
+      "source": "scripts_claude_to_obsidian_process_file",
+      "target": "path",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L258",
+      "weight": 1.0,
+      "source": "scripts_claude_to_obsidian_process_file",
+      "target": "scripts_claude_to_obsidian_extract_tags",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L139",
+      "weight": 1.0,
+      "source": "scripts_claude_to_obsidian_rationale_139",
+      "target": "scripts_claude_to_obsidian_extract_tags",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L255",
+      "weight": 1.0,
+      "source": "scripts_claude_to_obsidian_process_file",
+      "target": "scripts_claude_to_obsidian_strip_existing_frontmatter",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L155",
+      "weight": 1.0,
+      "source": "scripts_claude_to_obsidian_rationale_155",
+      "target": "scripts_claude_to_obsidian_strip_existing_frontmatter",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L270",
+      "weight": 1.0,
+      "source": "scripts_claude_to_obsidian_process_file",
+      "target": "scripts_claude_to_obsidian_build_frontmatter",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L178",
+      "weight": 1.0,
+      "source": "scripts_claude_to_obsidian_rationale_178",
+      "target": "scripts_claude_to_obsidian_build_frontmatter",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L336",
+      "weight": 1.0,
+      "source": "scripts_claude_to_obsidian_main",
+      "target": "scripts_claude_to_obsidian_collect_vault_notes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L199",
+      "weight": 1.0,
+      "source": "scripts_claude_to_obsidian_rationale_199",
+      "target": "scripts_claude_to_obsidian_collect_vault_notes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L267",
+      "weight": 1.0,
+      "source": "scripts_claude_to_obsidian_process_file",
+      "target": "scripts_claude_to_obsidian_insert_wikilinks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L215",
+      "weight": 1.0,
+      "source": "scripts_claude_to_obsidian_rationale_215",
+      "target": "scripts_claude_to_obsidian_insert_wikilinks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L353",
+      "weight": 1.0,
+      "source": "scripts_claude_to_obsidian_main",
+      "target": "scripts_claude_to_obsidian_process_file",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_obsidian.py",
+      "source_location": "L253",
+      "weight": 1.0,
+      "source": "scripts_claude_to_obsidian_rationale_253",
+      "target": "scripts_claude_to_obsidian_process_file",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/obsidian-query.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "scripts_obsidian_query",
+      "target": "home_hfeng1_claude_code_memory_setup_scripts_obsidian_query_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/obsidian-query.sh",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "scripts_obsidian_query",
+      "target": "scripts_obsidian_query_display",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/obsidian-query.sh",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "scripts_obsidian_query",
+      "target": "scripts_obsidian_query_xdg_runtime_dir",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "scripts_setup",
+      "target": "home_hfeng1_claude_code_memory_setup_scripts_setup_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup.sh",
+      "source_location": "L54",
+      "weight": 1.0,
+      "source": "scripts_setup",
+      "target": "scripts_setup_install_template",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup.sh",
+      "source_location": "L63",
+      "weight": 1.0,
+      "context": "call",
+      "source": "home_hfeng1_claude_code_memory_setup_scripts_setup_sh__entry",
+      "target": "scripts_setup_install_template",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/sync_claude_obsidian.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "scripts_sync_claude_obsidian",
+      "target": "home_hfeng1_claude_code_memory_setup_scripts_sync_claude_obsidian_sh__entry",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": [],
+  "built_at_commit": "9c384236fc7fb96e6b822efa5852d22c7070e62b"
+}

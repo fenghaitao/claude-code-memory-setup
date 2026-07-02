@@ -88,7 +88,10 @@ this file defines *how* the vault is written, the skills decide *what* and
 ## Session transcripts (chats)
 - `/save-memory` writes the raw session into `memory/projects/<project>/chats/`
   (frontmatter `type: chat`, tag `chat-import`) — the ground-truth record beneath
-  the distilled notes. Excluded from the memory graph (`.graphifyignore`).
+  the distilled notes. Excluded from the memory graph by the **per-project**
+  `.graphifyignore` (created by `/save-memory` at the scan root — graphify's
+  ignore walk stops at the nearest VCS root, so the vault-level file is NOT
+  consulted for per-project scans unless `~/vault` itself is a git repo).
 - Legacy imports from the old pipeline may still sit in top-level `chats/`.
 - Graph View filters: `tag:chat-import` → chats only; `-path:chats` → hide chats.
 
