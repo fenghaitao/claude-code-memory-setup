@@ -33,9 +33,12 @@ is only for variable questions.
    if the repo graph is newer than the merged graph, re-sync the code layer.
    ```bash
    graphify update . 2>/dev/null || true    # refresh repo graph (source)
-   # then re-base the merged graph's code layer / re-bridge — see the sync process in
-   # the global config. (Until incremental link-doc lands, /save-memory already
-   # rebuilt the merged graph; a full re-bridge is only needed if code moved a lot.)
+   # Mechanical staleness check: merged.json records the input hashes it was
+   # composed from (graph.link_meta.code_graph_sha256). If the repo graph's
+   # sha256 no longer matches, re-compose:
+   #   graphify link-docs "$proj_dir" --code-graph <repo graph> \
+   #       --doc-graph "$proj_dir"/graphify-out/graph.json \
+   #       --match-code --link-code --out "$merged"
    ```
    Then read the briefing:
    - `$proj_dir/graphify-out/wiki/index.md` — the per-project map: code + decisions,

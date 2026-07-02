@@ -158,11 +158,14 @@ on its own:
 - **Staleness guard** (so "query only the merged graph" stays honest): the merged graph
   records the hashes of the two input graphs it was composed from; before querying, if
   either input is newer, re-compose first.
-- **Requires** a *two-graph* `link-doc` contract: take the repo graph + the memory
-  graph, emit bridge edges + the composed `merged.json` (`--out`), with a bridge cache
-  so re-links are edges-only deltas. *(Graphify TODO — today `link-doc` ingests doc
-  files into one graph; until the two-graph contract lands, the fallback is
-  `link-doc` over the note files with a full re-bridge each `/save-memory`.)*
+- **Implemented** as graphify's two-graph contract:
+  `graphify link-docs <proj_dir> --code-graph <repo graph> --doc-graph <memory graph>
+  --match-code --link-code --out <merged.json>`. Inputs are read-only; the output
+  records both input hashes under `graph.link_meta` — the staleness guard's check is
+  mechanical (compare the repo graph's sha256 to the recorded one). The memory graph
+  is built with `graphify extract <proj_dir> --doc-only` (semantic cache, no AST).
+  *(Remaining graphify TODO: a bridge cache — each re-link re-sends still-unlinked
+  concepts to the LLM; bounded at note scale.)*
 
 ### Memory tiers — query-first, NO auto-injection
 1. **Resident** — `MEMORY.md` / `CLAUDE.md` (incl. this pointer), every session.
@@ -195,9 +198,11 @@ surviving clone / CI / teammates. So `link-doc` serves two roles:
   your machine.
 
 Keep in the vault: fluid/undecided, personal, or cross-project notes. **De-dupe on
-promotion:** once a note graduates, delete it or leave a one-line pointer — never a
-divergent copy. Grounding input for `link-doc` is the manifest (`code-manifest.jsonl`),
-not the wiki.
+promotion: delete the vault note** (promotion is a move-as-PR, not a link — the doc
+re-enters the merged graph via the repo input on the next recompose, so nothing is
+lost). Never keep a divergent copy; don't leave pointer notes either — bridges are
+memory→code only, so a pointer would sit unbridged in the graph. Grounding input for
+`link-doc` is the manifest (`code-manifest.jsonl`), not the wiki.
 
 ### When to rebuild
 - Repo graph: `graphify update .` (per-commit, cheap).

@@ -197,11 +197,13 @@ graphify explain "<node>" --graph "$merged"
 
 The merged graph bridges your vault notes to code **locally** (vault nodes,
 machine-local). When a rationale is durable *and* repo-specific — an ADR a teammate
-cloning the repo would want — **graduate** it: move it into a repo doc, commit it, and
+cloning the repo would want — **graduate** it: move it into a repo doc (as a PR), and
 `graphify link-docs` ingests it into the **repo graph**, bridged to the code it
-explains. Now it survives clone / CI / teammates. De-dupe on promotion: delete the
-vault note or leave a one-line pointer, never a divergent copy. Fluid, personal, or
-cross-project notes stay in the vault.
+explains. Now it survives clone / CI / teammates — and it re-enters the merged graph
+via the repo input on the next recompose, so the vault loses nothing. De-dupe on
+promotion: delete the vault note (bridges are memory→code only, so a leftover pointer
+note would sit unbridged in the graph). Fluid, personal, or cross-project notes stay
+in the vault.
 
 ---
 
@@ -221,16 +223,18 @@ The full rationale lives in [`global-CLAUDE.md`](./global-CLAUDE.md); highlights
 - **Descend on checkable signals** — resolution / freshness / coverage, each with an
   observable trigger; two of them (editing, transcripts) are known *before* querying.
 
-### Graphify follow-ups this design assumes
+### Graphify support (implemented)
 
-Tracked as TODOs; a full re-link per `/save-memory` is the interim fallback:
+- **`extract --doc-only`** — build the notes-only memory graph: semantic pipeline +
+  cache, no AST; the counterpart of `--code-only`.
+- **Two-graph `link-docs`** — `--code-graph` + `--doc-graph` compose an existing code
+  graph with an existing doc graph into `--out` (default: `merged.json` next to the
+  doc graph). Inputs are never mutated, and the output records both input hashes
+  under `graph.link_meta`, making the "is the merged graph stale?" check mechanical.
 
-1. **Two-graph `link-doc`** — take the repo graph + the memory graph, emit bridge
-   edges + the composed `merged.json` (`--docs-graph`, `--out`), with a bridge cache
-   so re-links are edges-only deltas.
-2. **Staleness stamp** — record input-graph hashes in `merged.json` so the "is the
-   merged graph stale?" check is mechanical (and a `--verify` flag to mark nodes whose
-   `src` changed since extraction).
+*Remaining:* a bridge cache (each re-link re-sends still-unlinked concepts to the
+LLM — bounded at note scale) and a query-time `--verify` flag marking nodes whose
+`src` changed since extraction.
 
 ---
 
