@@ -17,6 +17,7 @@ memory/
 └── projects/<project>/
     ├── decisions/             ADRs, why-X-over-Y                   ✓ graphed → bridged to code
     ├── notes/                 permanent / concept notes           ✓ graphed → bridged to code
+    ├── sessions/              summary-<chat-basename>.md: processed marker + recap ✓ graphed
     ├── chats/                 raw session transcripts              ✗ excluded
     └── graphify-out/          graph.json = MEMORY graph (notes only, input)
                                merged.json = MERGED query surface (repo ⊕ memory ⊕ bridges)
@@ -26,8 +27,11 @@ graphify/                    code-graphs rendered as notes          ✗ not grap
 ```
 
 Rule of thumb: **distilled judgment → `decisions/`+`notes/` (graphed); raw
-narrative, transcripts, tooling → excluded.** `/save-memory` writes both — notes
-into `decisions/`+`notes/`, and the raw session into `chats/`.
+narrative, transcripts, tooling → excluded.** `/save-memory` writes the raw
+session into `chats/`, then `/ingest-session` distills it into `decisions/`+
+`notes/` and writes the mirrored `sessions/summary-<basename>.md` — a transcript
+counts as processed iff that mirrored file exists (no other marker; raw is
+never edited to record that it was processed).
 
 **The graph pipeline** (index is always `<dir>/graphify-out/wiki/index.md`):
 - **Memory graph** `projects/<project>/graphify-out/graph.json` — this project's
@@ -85,13 +89,20 @@ the Zettelkasten rules **above** as the single source of truth when writing here
 this file defines *how* the vault is written, the skills decide *what* and
 *where*. Do not re-add command logic to this file.
 
-## Session transcripts (chats)
+## Session transcripts (chats) and their distillation (sessions)
 - `/save-memory` writes the raw session into `memory/projects/<project>/chats/`
   (frontmatter `type: chat`, tag `chat-import`) — the ground-truth record beneath
   the distilled notes. Excluded from the memory graph by the **per-project**
   `.graphifyignore` (created by `/save-memory` at the scan root — graphify's
   ignore walk stops at the nearest VCS root, so the vault-level file is NOT
   consulted for per-project scans unless `~/vault` itself is a git repo).
+- **`/ingest-session`** (invoked by `/save-memory` right after the transcript is
+  written, or standalone to backfill old ones) reads a `chats/<basename>.md`
+  file — never this-conversation's own memory of itself — and writes
+  `decisions/`/`notes/` entries plus a mirrored `sessions/summary-<basename>.md`.
+  A transcript is "processed" iff that mirrored file exists — the analogue of
+  a raw→summary link elsewhere in the design, adapted since one transcript maps
+  to *many* atomic notes rather than one summary.
 - Legacy imports from the old pipeline may still sit in top-level `chats/`.
 - Graph View filters: `tag:chat-import` → chats only; `-path:chats` → hide chats.
 

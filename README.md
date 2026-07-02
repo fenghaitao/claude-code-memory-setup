@@ -95,6 +95,7 @@ scripts/
 └── sync_claude_obsidian.sh  # optional bulk chat-import automation
 skills/
 ├── save-memory/         # /save-memory — persist a session into the memory layer
+├── ingest-session/      # /ingest-session — distill a transcript into decisions/notes
 ├── load-memory/         # /load-memory — reload a project's memory
 └── obsidian-cli/        # vendored Obsidian CLI skill (fresh-machine fallback)
 vault/
@@ -146,6 +147,7 @@ structure or `.graphifyignore`.
 └── projects/<project>/
     ├── decisions/                       ADRs, why-X-over-Y                 ✓ graphed → bridged to code
     ├── notes/                           permanent / concept notes          ✓ graphed → bridged to code
+    ├── sessions/                        summary-<chat>.md: processed marker + recap ✓ graphed
     ├── chats/                           raw session transcripts            ✗ excluded
     └── graphify-out/
         ├── graph.json                   memory graph (notes only, input)
@@ -159,12 +161,17 @@ structure or `.graphifyignore`.
 
 ## Usage
 
-### `/save-memory` — write the session into memory
+### `/save-memory` + `/ingest-session` — write the session into memory
 
-Run at the end of a session (context still warm). It:
-- writes distilled **decisions/notes** into `~/vault/memory/projects/<project>/`
-  (graphed), linking related notes and marking replaced ones with `supersedes`;
-- dumps the **raw transcript** into that project's `chats/` (excluded from the graphs);
+Run at the end of a session (context still warm). `/save-memory`:
+- dumps the **raw transcript** into `~/vault/memory/projects/<project>/chats/`
+  (excluded from the graphs);
+- hands off to **`/ingest-session`**, which reads that transcript file back off disk
+  (never this conversation's own possibly-`/compact`-ed memory of itself) and writes
+  distilled **decisions/notes** (graphed), linking related notes and marking replaced
+  ones with `supersedes`, plus a mirrored `sessions/summary-<chat-basename>.md` — a
+  transcript counts as processed iff that file exists, so `/ingest-session` alone (no
+  path) also backfills any older un-distilled transcripts;
 - **syncs the pipeline**: refreshes the repo + memory graphs, re-links them into
   `merged.json`, and re-exports the briefings;
 - flags any *durable, repo-specific* decision as a candidate to graduate into a repo

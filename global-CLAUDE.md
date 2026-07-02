@@ -178,13 +178,18 @@ stale-and-always-paid; the `index.md` cache is read only when `/load-memory` fir
 (same freshness as a query). The "did I remember to look?" gap is covered by the
 resident pointer plus `/load-memory`.
 
-### Writing memory (`/save-memory`)
-After a decision or a finished chunk, persist the *judgment*: atomic
-decision/permanent notes under `~/vault/memory/projects/<project>/` (`decisions/`,
-`notes/` — graphed) plus the raw transcript into that project's `chats/` (excluded),
-per `~/vault/CLAUDE.md`'s Zettelkasten rules. Store only what graphify can't regenerate
+### Writing memory (`/save-memory`, `/ingest-session`)
+After a decision or a finished chunk, persist the session: `/save-memory` writes
+the raw transcript into `~/vault/memory/projects/<project>/chats/` (excluded),
+then hands off to `/ingest-session`, which reads that transcript file — not this
+conversation's own (possibly `/compact`-ed) memory of itself — and distills atomic
+decision/permanent notes into `decisions/`, `notes/` (graphed), per
+`~/vault/CLAUDE.md`'s Zettelkasten rules. Store only what graphify can't regenerate
 (why, tradeoffs, status) — never caller lists, signatures, or anything mechanically
-derivable. Then sync (re-bridge) + `export wiki`.
+derivable. `/ingest-session` also writes the mirrored `sessions/summary-<basename>.md`
+— a transcript is "processed" iff that file exists, so it doubles as the tracker for
+backfilling old sessions (`/ingest-session` with no path). Then sync (re-bridge) +
+`export wiki`.
 
 ### Graduating memory → the *portable* repo L1 (`link-doc` into a repo doc)
 The merged graph already bridges your vault notes to code — but **locally** (vault

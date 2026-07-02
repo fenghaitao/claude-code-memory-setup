@@ -47,7 +47,10 @@ is only for variable questions.
 3. **Read the recent decision/permanent notes for *status*.** The map is topology;
    "where we left off / what's pending" lives in the note bodies + frontmatter
    (`status:`). Read the newest under `$proj_dir/decisions/` and `$proj_dir/notes/`;
-   follow `supersedes` links to see what's in force vs replaced.
+   follow `supersedes` links to see what's in force vs replaced. For a quick
+   "what happened last time" without opening every note, the newest
+   `$proj_dir/sessions/summary-*.md` (written by `/ingest-session`) is a
+   one-page recap per session with links to what it produced.
 
 4. **Backdrop: the global tier.** For cross-cutting conventions or prior art from other
    projects, read `~/vault/memory/graphify-out/wiki/index.md` (or query
