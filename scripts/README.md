@@ -6,111 +6,84 @@ Helper scripts for the Claude Code + Obsidian + Graphify setup.
 
 | File | Purpose |
 |------|---------|
-| `claude_to_obsidian.py` | Process exported Claude chats and import them into your Obsidian vault with frontmatter, auto-tags, and wikilinks |
-| `sync_claude_obsidian.sh` | Automation wrapper: exports Claude Code chats and runs the processor |
-
-## Setup
-
-1. **Copy both files to `~/scripts/`:**
-
-   ```bash
-   mkdir -p ~/scripts
-   cp claude_to_obsidian.py ~/scripts/
-   cp sync_claude_obsidian.sh ~/scripts/
-   chmod +x ~/scripts/sync_claude_obsidian.sh
-   ```
-
-2. **Install the Claude Code extractor:**
-
-   ```bash
-   pip install claude-conversation-extractor
-   ```
-
-3. **Edit `sync_claude_obsidian.sh`:**
-
-   Open the file and change `VAULT_DIR` to point to your Obsidian vault:
-
-   ```bash
-   VAULT_DIR="$HOME/YourVaultName"
-   ```
-
-4. **Customize tags (optional):**
-
-   Open `claude_to_obsidian.py` and edit the `KEYWORD_TAG_MAP` dictionary at the top. Add keywords specific to your stack and projects:
-
-   ```python
-   KEYWORD_TAG_MAP = {
-       "my-project": "my-project",
-       "client-name": "client-work",
-       # ... your keywords
-   }
-   ```
-
-5. **Test manually:**
-
-   ```bash
-   ~/scripts/sync_claude_obsidian.sh
-   ```
-
-   Check the log:
-   ```bash
-   tail -f ~/scripts/claude_obsidian_sync.log
-   ```
-
-6. **Schedule via cron (daily at 10pm):**
-
-   ```bash
-   (crontab -l 2>/dev/null; echo "0 22 * * * $HOME/scripts/sync_claude_obsidian.sh") | crontab -
-   ```
+| `claude_to_vault.py` | Parse Claude Code JSONL session transcripts directly and write them into `~/vault/memory/projects/<project>/chats/`, ready for `/ingest-session` |
+| `sync_claude_vault.sh` | Optional cron wrapper around `claude_to_vault.py`, with logging |
 
 ## How it works
 
-1. `sync_claude_obsidian.sh` runs `claude-extract` to export all Claude Code conversations as `.md` files into `~/claude-exports/code/`
-2. Web chats can be manually exported via the **"Export Claude Chat to Markdown"** browser extension into `~/claude-exports/web/`
-3. `claude_to_obsidian.py` processes each `.md`:
-   - Detects origin (Code vs Web)
-   - Generates auto-tags via keyword matching
-   - Adds standardized YAML frontmatter
-   - Inserts `[[wikilinks]]` for notes that already exist in your vault
-4. Files are moved (with `--move` flag) into `<vault>/chats/code/` or `<vault>/chats/web/`
+`claude_to_vault.py` reads straight from `~/.claude/projects/**/*.jsonl` — no
+separate export step. For each session it:
 
-## CLI options
+- Merges continuation files by `session_id`, dedupes repeated/streamed
+  records, and drops tool-output/local-command noise.
+- Resolves the target project the same way `/save-memory` does (basename of
+  the session's git toplevel, falling back to the session's cwd).
+- Also captures Task-tool subagent runs (`<session>/subagents/*.jsonl`) as
+  their own separate transcripts — tagged `subagent`, linked back via
+  `parent_session_id`/`agent_id` — rather than merging them into the parent
+  session (they carry the parent's session id but are a distinct
+  conversation; merging them in was a real bug found while consolidating
+  this script). Pass `--no-subagents` to skip them.
+- Writes `chats/<date>-<slug>.md` with standard vault frontmatter (title,
+  tags, `type: chat`, plus behavior metadata: `task_type`,
+  `correction_density`, `context_frontloaded`, `tools_used`) — see
+  `~/vault/CLAUDE.md` for the frontmatter rules.
+- Skips a session if it's already present anywhere in that project's
+  `chats/` (matched by session id substring) — safe to re-run.
+- Bootstraps the project's `decisions/`, `notes/`, `sessions/` dirs and
+  `.graphifyignore` the same way `/save-memory` step 1 does.
+
+## Usage
 
 ```bash
-python3 claude_to_obsidian.py \
-    --export-dir ~/claude-exports \
-    --vault-dir ~/ObsidianVault \
-    --move
+# Backfill every session across every Claude Code project into the vault:
+python3 claude_to_vault.py
+
+# Only sessions on/after a date, or matching a project name substring:
+python3 claude_to_vault.py --since 2026-06-01 --project conductor
+
+# Fast path used by /save-memory: just the current directory's latest main session
+python3 claude_to_vault.py --latest --cwd "$(pwd)"
+
+# Preview without writing anything
+python3 claude_to_vault.py --dry-run
 ```
 
 | Flag | Description |
 |------|-------------|
-| `--export-dir` | Directory containing exported `.md` files (required) |
-| `--vault-dir` | Path to your Obsidian vault (required) |
-| `--dry-run` | Preview what would happen without modifying anything |
-| `--move` | Delete originals after copying (default: copy only) |
-| `--origin` | Force origin: `code`, `web`, or `auto` (default: `auto`) |
-| `--no-wikilinks` | Disable wikilink insertion |
+| `--projects-dir` | Claude Code sessions root (default `~/.claude/projects`) |
+| `--vault-root` | Vault memory root; project dirs live under `<vault-root>/projects/` (default `~/vault/memory`) |
+| `--since YYYY-MM-DD` | Only sessions on/after this date |
+| `--project <substr>` | Only projects whose resolved name contains this substring |
+| `--latest` | Only the most recent **main** session for `--cwd` (never a subagent run) — the fast path `/save-memory` uses |
+| `--cwd <path>` | cwd to resolve for `--latest` (default: current directory) |
+| `--no-subagents` | Skip Task-tool subagent transcripts entirely |
+| `--dry-run` | Preview without writing anything |
+
+## Cron setup (optional)
+
+```bash
+chmod +x sync_claude_vault.sh
+./sync_claude_vault.sh                    # test manually
+tail -f claude_vault_sync.log             # check the log
+
+# schedule daily at 10pm
+(crontab -l 2>/dev/null; echo "0 22 * * * $HOME/claude-code-memory-setup/scripts/sync_claude_vault.sh") | crontab -
+```
 
 ## Filter in Obsidian Graph View
 
-After import, use these filters:
-
 - `tag:chat-import` → only imported chats
+- `tag:subagent` → only subagent-run transcripts
 - `path:chats` → all chats by folder
 - `-path:chats` → hide all chats
-- `tag:python tag:chat-import` → Python-related chats only
 
 ## Troubleshooting
-
-**`claude-extract` not found:**
-Install with `pip install claude-conversation-extractor`. If still not found, check that pip's bin directory is in your `$PATH`.
 
 **Cron job doesn't run on macOS:**
 Grant Full Disk Access to `cron` in System Preferences → Privacy & Security → Full Disk Access.
 
-**No tags being generated:**
-Check that `KEYWORD_TAG_MAP` in `claude_to_obsidian.py` contains keywords actually present in your chats. Run with `--dry-run` to debug.
-
-**Wikilinks not inserted:**
-The script only inserts wikilinks for notes that already exist in your vault. Make sure your `--vault-dir` points to a vault with notes (not an empty folder).
+**A session wasn't picked up:**
+Check its first message has real content — pure tool-output/local-command
+turns are filtered as noise and won't anchor a session on their own if nothing
+else in it has a timestamped user/assistant turn.

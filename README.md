@@ -97,8 +97,8 @@ global-CLAUDE.md         # the whole model above, imported into ~/.claude/CLAUDE
 scripts/
 ├── setup.sh             # idempotent installer (wires everything up)
 ├── obsidian-query.sh    # wrapper for the Obsidian CLI (raw reader for memory)
-├── claude_to_obsidian.py    # render/import a session transcript into the vault
-└── sync_claude_obsidian.sh  # optional bulk chat-import automation
+├── claude_to_vault.py       # convert Claude Code JSONL sessions into vault chat transcripts
+└── sync_claude_vault.sh     # optional cron wrapper around claude_to_vault.py
 skills/
 ├── save-memory/         # /save-memory — persist a session into the memory layer
 ├── ingest-session/      # /ingest-session — distill a transcript into decisions/notes

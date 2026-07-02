@@ -4,174 +4,284 @@
   "graph": {},
   "nodes": [
     {
-      "label": "claude_to_obsidian.py",
+      "label": "claude_to_vault.py",
       "file_type": "code",
-      "source_file": "scripts/claude_to_obsidian.py",
+      "source_file": "scripts/claude_to_vault.py",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "scripts_claude_to_obsidian",
-      "community": 2,
-      "norm_label": "claude_to_obsidian.py"
+      "id": "scripts_claude_to_vault",
+      "community": 153,
+      "norm_label": "claude_to_vault.py"
     },
     {
-      "label": "detect_origin()",
+      "label": "parse_timestamp()",
       "file_type": "code",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L124",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L57",
       "_origin": "ast",
-      "id": "scripts_claude_to_obsidian_detect_origin",
-      "community": 0,
-      "norm_label": "detect_origin()"
+      "id": "scripts_claude_to_vault_parse_timestamp",
+      "community": 153,
+      "norm_label": "parse_timestamp()"
     },
     {
-      "label": "Path",
+      "label": "_iter_json()",
       "file_type": "code",
-      "source_file": "",
-      "source_location": "",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L66",
       "_origin": "ast",
-      "id": "path",
-      "community": 0,
-      "norm_label": "path"
+      "id": "scripts_claude_to_vault_iter_json",
+      "community": 153,
+      "norm_label": "_iter_json()"
     },
     {
-      "label": "extract_tags()",
+      "label": "_user_text()",
       "file_type": "code",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L138",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L81",
       "_origin": "ast",
-      "id": "scripts_claude_to_obsidian_extract_tags",
-      "community": 6,
-      "norm_label": "extract_tags()"
+      "id": "scripts_claude_to_vault_user_text",
+      "community": 153,
+      "norm_label": "_user_text()"
     },
     {
-      "label": "strip_existing_frontmatter()",
+      "label": "_assistant_blocks()",
       "file_type": "code",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L154",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L98",
       "_origin": "ast",
-      "id": "scripts_claude_to_obsidian_strip_existing_frontmatter",
-      "community": 8,
-      "norm_label": "strip_existing_frontmatter()"
+      "id": "scripts_claude_to_vault_assistant_blocks",
+      "community": 153,
+      "norm_label": "_assistant_blocks()"
     },
     {
-      "label": "build_frontmatter()",
+      "label": "parse_session()",
       "file_type": "code",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L172",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L116",
       "_origin": "ast",
-      "id": "scripts_claude_to_obsidian_build_frontmatter",
-      "community": 5,
-      "norm_label": "build_frontmatter()"
+      "id": "scripts_claude_to_vault_parse_session",
+      "community": 153,
+      "norm_label": "parse_session()"
     },
     {
-      "label": "collect_vault_notes()",
+      "label": "_dedup_sort()",
       "file_type": "code",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L198",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L159",
       "_origin": "ast",
-      "id": "scripts_claude_to_obsidian_collect_vault_notes",
-      "community": 2,
-      "norm_label": "collect_vault_notes()"
+      "id": "scripts_claude_to_vault_dedup_sort",
+      "community": 153,
+      "norm_label": "_dedup_sort()"
     },
     {
-      "label": "insert_wikilinks()",
+      "label": "_find_main_transcripts()",
       "file_type": "code",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L214",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L173",
       "_origin": "ast",
-      "id": "scripts_claude_to_obsidian_insert_wikilinks",
-      "community": 7,
-      "norm_label": "insert_wikilinks()"
+      "id": "scripts_claude_to_vault_find_main_transcripts",
+      "community": 153,
+      "norm_label": "_find_main_transcripts()"
     },
     {
-      "label": "process_file()",
+      "label": "_find_subagent_transcripts()",
       "file_type": "code",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L244",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L187",
       "_origin": "ast",
-      "id": "scripts_claude_to_obsidian_process_file",
-      "community": 0,
-      "norm_label": "process_file()"
+      "id": "scripts_claude_to_vault_find_subagent_transcripts",
+      "community": 153,
+      "norm_label": "_find_subagent_transcripts()"
+    },
+    {
+      "label": "_collect_sessions()",
+      "file_type": "code",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L199",
+      "_origin": "ast",
+      "id": "scripts_claude_to_vault_collect_sessions",
+      "community": 153,
+      "norm_label": "_collect_sessions()"
+    },
+    {
+      "label": "_session_behavior()",
+      "file_type": "code",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L260",
+      "_origin": "ast",
+      "id": "scripts_claude_to_vault_session_behavior",
+      "community": 153,
+      "norm_label": "_session_behavior()"
+    },
+    {
+      "label": "resolve_project()",
+      "file_type": "code",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L297",
+      "_origin": "ast",
+      "id": "scripts_claude_to_vault_resolve_project",
+      "community": 153,
+      "norm_label": "resolve_project()"
+    },
+    {
+      "label": "slugify()",
+      "file_type": "code",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L313",
+      "_origin": "ast",
+      "id": "scripts_claude_to_vault_slugify",
+      "community": 153,
+      "norm_label": "slugify()"
+    },
+    {
+      "label": "ensure_project_dirs()",
+      "file_type": "code",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L324",
+      "_origin": "ast",
+      "id": "scripts_claude_to_vault_ensure_project_dirs",
+      "community": 153,
+      "norm_label": "ensure_project_dirs()"
+    },
+    {
+      "label": "already_exported()",
+      "file_type": "code",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L336",
+      "_origin": "ast",
+      "id": "scripts_claude_to_vault_already_exported",
+      "community": 153,
+      "norm_label": "already_exported()"
+    },
+    {
+      "label": "dest_path()",
+      "file_type": "code",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L351",
+      "_origin": "ast",
+      "id": "scripts_claude_to_vault_dest_path",
+      "community": 153,
+      "norm_label": "dest_path()"
+    },
+    {
+      "label": "render()",
+      "file_type": "code",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L359",
+      "_origin": "ast",
+      "id": "scripts_claude_to_vault_render",
+      "community": 153,
+      "norm_label": "render()"
     },
     {
       "label": "main()",
       "file_type": "code",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L296",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L429",
       "_origin": "ast",
-      "id": "scripts_claude_to_obsidian_main",
-      "community": 2,
+      "id": "scripts_claude_to_vault_main",
+      "community": 153,
       "norm_label": "main()"
     },
     {
-      "label": "Detect whether the chat is from Claude Code or Claude Web.",
+      "label": "Plain text of a user turn, or '' if it's noise/tool-output (skip those).",
       "file_type": "rationale",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L125",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L82",
       "_origin": "ast",
-      "id": "scripts_claude_to_obsidian_rationale_125",
-      "community": 0,
-      "norm_label": "detect whether the chat is from claude code or claude web."
+      "id": "scripts_claude_to_vault_rationale_82",
+      "community": 153,
+      "norm_label": "plain text of a user turn, or '' if it's noise/tool-output (skip those)."
     },
     {
-      "label": "Extract tags via keyword matching in the content.",
+      "label": "Return (text, [tool summaries]) for an assistant turn; thinking omitted.",
       "file_type": "rationale",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L139",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L99",
       "_origin": "ast",
-      "id": "scripts_claude_to_obsidian_rationale_139",
-      "community": 6,
-      "norm_label": "extract tags via keyword matching in the content."
+      "id": "scripts_claude_to_vault_rationale_99",
+      "community": 153,
+      "norm_label": "return (text, [tool summaries]) for an assistant turn; thinking omitted."
     },
     {
-      "label": "Remove existing frontmatter and return parsed fields + body.",
+      "label": "Parse one transcript into an ordered event stream + metadata.      `allow_sidech",
       "file_type": "rationale",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L155",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L117",
       "_origin": "ast",
-      "id": "scripts_claude_to_obsidian_rationale_155",
-      "community": 8,
-      "norm_label": "remove existing frontmatter and return parsed fields + body."
+      "id": "scripts_claude_to_vault_rationale_117",
+      "community": 153,
+      "norm_label": "parse one transcript into an ordered event stream + metadata.      `allow_sidech"
     },
     {
-      "label": "Build the YAML frontmatter block.",
+      "label": "Order events by time and drop exact duplicates (a session resumed     across mul",
       "file_type": "rationale",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L178",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L160",
       "_origin": "ast",
-      "id": "scripts_claude_to_obsidian_rationale_178",
-      "community": 5,
-      "norm_label": "build the yaml frontmatter block."
+      "id": "scripts_claude_to_vault_rationale_160",
+      "community": 153,
+      "norm_label": "order events by time and drop exact duplicates (a session resumed     across mul"
     },
     {
-      "label": "Collect names of all .md notes in the vault (without extension).",
+      "label": "Top-level *.jsonl only: <scan_dir>/*.jsonl (scan_dir already a project     dir,",
       "file_type": "rationale",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L199",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L174",
       "_origin": "ast",
-      "id": "scripts_claude_to_obsidian_rationale_199",
-      "community": 2,
-      "norm_label": "collect names of all .md notes in the vault (without extension)."
+      "id": "scripts_claude_to_vault_rationale_174",
+      "community": 153,
+      "norm_label": "top-level *.jsonl only: <scan_dir>/*.jsonl (scan_dir already a project     dir,"
     },
     {
-      "label": "Insert [[wikilinks]] for vault notes on first occurrence.",
+      "label": "<sid>/subagents/*.jsonl \u2014 one file per Task-tool subagent run. These     carry t",
       "file_type": "rationale",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L215",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L188",
       "_origin": "ast",
-      "id": "scripts_claude_to_obsidian_rationale_215",
-      "community": 7,
-      "norm_label": "insert [[wikilinks]] for vault notes on first occurrence."
+      "id": "scripts_claude_to_vault_rationale_188",
+      "community": 153,
+      "norm_label": "<sid>/subagents/*.jsonl \u2014 one file per task-tool subagent run. these     carry t"
     },
     {
-      "label": "Process a single exported .md file.",
+      "label": "Find transcripts under scan_dir, merge by identity key (in case a     resumed se",
       "file_type": "rationale",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L253",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L200",
       "_origin": "ast",
-      "id": "scripts_claude_to_obsidian_rationale_253",
-      "community": 0,
-      "norm_label": "process a single exported .md file."
+      "id": "scripts_claude_to_vault_rationale_200",
+      "community": 153,
+      "norm_label": "find transcripts under scan_dir, merge by identity key (in case a     resumed se"
+    },
+    {
+      "label": "Match /save-memory's own resolution: basename of the git toplevel, or     basena",
+      "file_type": "rationale",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L298",
+      "_origin": "ast",
+      "id": "scripts_claude_to_vault_rationale_298",
+      "community": 153,
+      "norm_label": "match /save-memory's own resolution: basename of the git toplevel, or     basena"
+    },
+    {
+      "label": "Mirror /save-memory step 1: create the project's memory layout and the     per-p",
+      "file_type": "rationale",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L325",
+      "_origin": "ast",
+      "id": "scripts_claude_to_vault_rationale_325",
+      "community": 153,
+      "norm_label": "mirror /save-memory step 1: create the project's memory layout and the     per-p"
+    },
+    {
+      "label": "A bare substring match on the UUID, not just our own `session_id:`     frontmatt",
+      "file_type": "rationale",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L337",
+      "_origin": "ast",
+      "id": "scripts_claude_to_vault_rationale_337",
+      "community": 153,
+      "norm_label": "a bare substring match on the uuid, not just our own `session_id:`     frontmatt"
     },
     {
       "label": "obsidian-query.sh",
@@ -272,294 +382,1631 @@
       "norm_label": "install_template()"
     },
     {
-      "label": "sync_claude_obsidian.sh",
+      "label": "sync_claude_vault.sh",
       "file_type": "code",
-      "source_file": "scripts/sync_claude_obsidian.sh",
+      "source_file": "scripts/sync_claude_vault.sh",
       "source_location": "L1",
       "metadata": {
         "language": "bash",
         "kind": "file"
       },
       "_origin": "ast",
-      "id": "scripts_sync_claude_obsidian",
+      "id": "scripts_sync_claude_vault",
       "community": 4,
-      "norm_label": "sync_claude_obsidian.sh"
+      "norm_label": "sync_claude_vault.sh"
     },
     {
-      "label": "sync_claude_obsidian.sh script",
+      "label": "sync_claude_vault.sh script",
       "file_type": "code",
-      "source_file": "scripts/sync_claude_obsidian.sh",
+      "source_file": "scripts/sync_claude_vault.sh",
       "source_location": "L1",
       "metadata": {
         "language": "bash",
         "kind": "bash_entrypoint"
       },
       "_origin": "ast",
-      "id": "home_hfeng1_claude_code_memory_setup_scripts_sync_claude_obsidian_sh__entry",
+      "id": "home_hfeng1_claude_code_memory_setup_scripts_sync_claude_vault_sh__entry",
       "community": 4,
-      "norm_label": "sync_claude_obsidian.sh script"
+      "norm_label": "sync_claude_vault.sh script"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "readme",
+      "community": 129,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "Claude Code Memory Setup",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "readme_claude_code_memory_setup",
+      "community": 0,
+      "norm_label": "claude code memory setup"
+    },
+    {
+      "label": "The pipeline",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "readme_the_pipeline",
+      "community": 0,
+      "norm_label": "the pipeline"
+    },
+    {
+      "label": "How a question is answered",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L59",
+      "_origin": "ast",
+      "id": "readme_how_a_question_is_answered",
+      "community": 0,
+      "norm_label": "how a question is answered"
+    },
+    {
+      "label": "Two caches, two invalidations",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L76",
+      "_origin": "ast",
+      "id": "readme_two_caches_two_invalidations",
+      "community": 0,
+      "norm_label": "two caches, two invalidations"
+    },
+    {
+      "label": "What's in this repo",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L93",
+      "_origin": "ast",
+      "id": "readme_what_s_in_this_repo",
+      "community": 0,
+      "norm_label": "what's in this repo"
+    },
+    {
+      "label": "Install",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L116",
+      "_origin": "ast",
+      "id": "readme_install",
+      "community": 0,
+      "norm_label": "install"
+    },
+    {
+      "label": "The memory layer",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L146",
+      "_origin": "ast",
+      "id": "readme_the_memory_layer",
+      "community": 0,
+      "norm_label": "the memory layer"
+    },
+    {
+      "label": "Usage",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L170",
+      "_origin": "ast",
+      "id": "readme_usage",
+      "community": 0,
+      "norm_label": "usage"
+    },
+    {
+      "label": "`/save-memory` + `/ingest-session` \u2014 write the session into memory",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L172",
+      "_origin": "ast",
+      "id": "readme_save_memory_ingest_session_write_the_session_into_memory",
+      "community": 0,
+      "norm_label": "`/save-memory` + `/ingest-session` \u2014 write the session into memory"
+    },
+    {
+      "label": "`/ingest-principles` \u2014 generalize project notes into the global tier",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L188",
+      "_origin": "ast",
+      "id": "readme_ingest_principles_generalize_project_notes_into_the_global_tier",
+      "community": 0,
+      "norm_label": "`/ingest-principles` \u2014 generalize project notes into the global tier"
+    },
+    {
+      "label": "`/skill-learning` \u2014 turn friction with these skills into sharper judgment",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L201",
+      "_origin": "ast",
+      "id": "readme_skill_learning_turn_friction_with_these_skills_into_sharper_judgment",
+      "community": 0,
+      "norm_label": "`/skill-learning` \u2014 turn friction with these skills into sharper judgment"
+    },
+    {
+      "label": "`/load-memory` \u2014 reload a project's memory",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L213",
+      "_origin": "ast",
+      "id": "readme_load_memory_reload_a_project_s_memory",
+      "community": 0,
+      "norm_label": "`/load-memory` \u2014 reload a project's memory"
+    },
+    {
+      "label": "Querying by hand",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L221",
+      "_origin": "ast",
+      "id": "readme_querying_by_hand",
+      "community": 0,
+      "norm_label": "querying by hand"
+    },
+    {
+      "label": "Promoting memory \u2192 the portable repo graph",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L236",
+      "_origin": "ast",
+      "id": "readme_promoting_memory_the_portable_repo_graph",
+      "community": 0,
+      "norm_label": "promoting memory \u2192 the portable repo graph"
+    },
+    {
+      "label": "Design notes",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L250",
+      "_origin": "ast",
+      "id": "readme_design_notes",
+      "community": 0,
+      "norm_label": "design notes"
+    },
+    {
+      "label": "Graphify support (implemented)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L266",
+      "_origin": "ast",
+      "id": "readme_graphify_support_implemented",
+      "community": 0,
+      "norm_label": "graphify support (implemented)"
+    },
+    {
+      "label": "Credits & Links",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L281",
+      "_origin": "ast",
+      "id": "readme_credits_links",
+      "community": 0,
+      "norm_label": "credits & links"
+    },
+    {
+      "label": "global-CLAUDE.md",
+      "file_type": "document",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "global_claude",
+      "community": 129,
+      "norm_label": "global-claude.md"
+    },
+    {
+      "label": "Git commits",
+      "file_type": "document",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "global_claude_git_commits",
+      "community": 129,
+      "norm_label": "git commits"
+    },
+    {
+      "label": "graphify",
+      "file_type": "document",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "global_claude_graphify",
+      "community": 129,
+      "norm_label": "graphify"
+    },
+    {
+      "label": "Context Navigation (memory + graphify)",
+      "file_type": "document",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "global_claude_context_navigation_memory_graphify",
+      "community": 129,
+      "norm_label": "context navigation (memory + graphify)"
+    },
+    {
+      "label": "The graphs: a pipeline of artifacts (one query surface per project)",
+      "file_type": "document",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "global_claude_the_graphs_a_pipeline_of_artifacts_one_query_surface_per_project",
+      "community": 129,
+      "norm_label": "the graphs: a pipeline of artifacts (one query surface per project)"
+    },
+    {
+      "label": "Representation \u00d7 domain \u2014 still a 2\u00d72, but one query surface per project",
+      "file_type": "document",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L79",
+      "_origin": "ast",
+      "id": "global_claude_representation_domain_still_a_2_2_but_one_query_surface_per_project",
+      "community": 129,
+      "norm_label": "representation \u00d7 domain \u2014 still a 2\u00d72, but one query surface per project"
+    },
+    {
+      "label": "Route a question",
+      "file_type": "document",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L95",
+      "_origin": "ast",
+      "id": "global_claude_route_a_question",
+      "community": 129,
+      "norm_label": "route a question"
+    },
+    {
+      "label": "Querying L1 \u2014 graphify",
+      "file_type": "document",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L106",
+      "_origin": "ast",
+      "id": "global_claude_querying_l1_graphify",
+      "community": 129,
+      "norm_label": "querying l1 \u2014 graphify"
+    },
+    {
+      "label": "Querying L2 \u2014 raw, and *when* to descend",
+      "file_type": "document",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L112",
+      "_origin": "ast",
+      "id": "global_claude_querying_l2_raw_and_when_to_descend",
+      "community": 129,
+      "norm_label": "querying l2 \u2014 raw, and *when* to descend"
+    },
+    {
+      "label": "Two caches, two invalidations",
+      "file_type": "document",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L146",
+      "_origin": "ast",
+      "id": "global_claude_two_caches_two_invalidations",
+      "community": 129,
+      "norm_label": "two caches, two invalidations"
+    },
+    {
+      "label": "The sync process \u2014 keep merged = repo \u2295 memory \u2295 bridges fresh",
+      "file_type": "document",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L158",
+      "_origin": "ast",
+      "id": "global_claude_the_sync_process_keep_merged_repo_memory_bridges_fresh",
+      "community": 129,
+      "norm_label": "the sync process \u2014 keep merged = repo \u2295 memory \u2295 bridges fresh"
+    },
+    {
+      "label": "Memory tiers \u2014 query-first, NO auto-injection",
+      "file_type": "document",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L181",
+      "_origin": "ast",
+      "id": "global_claude_memory_tiers_query_first_no_auto_injection",
+      "community": 129,
+      "norm_label": "memory tiers \u2014 query-first, no auto-injection"
+    },
+    {
+      "label": "Writing memory (`/save-memory`, `/ingest-session`)",
+      "file_type": "document",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L192",
+      "_origin": "ast",
+      "id": "global_claude_writing_memory_save_memory_ingest_session",
+      "community": 129,
+      "norm_label": "writing memory (`/save-memory`, `/ingest-session`)"
+    },
+    {
+      "label": "Graduating memory \u2192 the *portable* repo L1 (`link-doc` into a repo doc)",
+      "file_type": "document",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L205",
+      "_origin": "ast",
+      "id": "global_claude_graduating_memory_the_portable_repo_l1_link_doc_into_a_repo_doc",
+      "community": 129,
+      "norm_label": "graduating memory \u2192 the *portable* repo l1 (`link-doc` into a repo doc)"
+    },
+    {
+      "label": "Graduating memory \u2192 the global tier (`/ingest-principles`)",
+      "file_type": "document",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L225",
+      "_origin": "ast",
+      "id": "global_claude_graduating_memory_the_global_tier_ingest_principles",
+      "community": 129,
+      "norm_label": "graduating memory \u2192 the global tier (`/ingest-principles`)"
+    },
+    {
+      "label": "When to rebuild",
+      "file_type": "document",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L239",
+      "_origin": "ast",
+      "id": "global_claude_when_to_rebuild",
+      "community": 129,
+      "norm_label": "when to rebuild"
+    },
+    {
+      "label": "Do NOT",
+      "file_type": "document",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L250",
+      "_origin": "ast",
+      "id": "global_claude_do_not",
+      "community": 129,
+      "norm_label": "do not"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "scripts/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "scripts_readme",
+      "community": 426,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "Scripts",
+      "file_type": "document",
+      "source_file": "scripts/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "scripts_readme_scripts",
+      "community": 426,
+      "norm_label": "scripts"
+    },
+    {
+      "label": "Files",
+      "file_type": "document",
+      "source_file": "scripts/README.md",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "scripts_readme_files",
+      "community": 426,
+      "norm_label": "files"
+    },
+    {
+      "label": "How it works",
+      "file_type": "document",
+      "source_file": "scripts/README.md",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "scripts_readme_how_it_works",
+      "community": 426,
+      "norm_label": "how it works"
+    },
+    {
+      "label": "Usage",
+      "file_type": "document",
+      "source_file": "scripts/README.md",
+      "source_location": "L36",
+      "_origin": "ast",
+      "id": "scripts_readme_usage",
+      "community": 426,
+      "norm_label": "usage"
+    },
+    {
+      "label": "Cron setup (optional)",
+      "file_type": "document",
+      "source_file": "scripts/README.md",
+      "source_location": "L63",
+      "_origin": "ast",
+      "id": "scripts_readme_cron_setup_optional",
+      "community": 426,
+      "norm_label": "cron setup (optional)"
+    },
+    {
+      "label": "Filter in Obsidian Graph View",
+      "file_type": "document",
+      "source_file": "scripts/README.md",
+      "source_location": "L74",
+      "_origin": "ast",
+      "id": "scripts_readme_filter_in_obsidian_graph_view",
+      "community": 426,
+      "norm_label": "filter in obsidian graph view"
+    },
+    {
+      "label": "Troubleshooting",
+      "file_type": "document",
+      "source_file": "scripts/README.md",
+      "source_location": "L81",
+      "_origin": "ast",
+      "id": "scripts_readme_troubleshooting",
+      "community": 426,
+      "norm_label": "troubleshooting"
+    },
+    {
+      "label": "SKILL.md",
+      "file_type": "document",
+      "source_file": "skills/ingest-principles/SKILL.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "ingest_principles_skill",
+      "community": 462,
+      "norm_label": "skill.md"
+    },
+    {
+      "label": "/ingest-principles \u2014 generalize project judgment into the global tier",
+      "file_type": "document",
+      "source_file": "skills/ingest-principles/SKILL.md",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "ingest_principles_skill_ingest_principles_generalize_project_judgment_into_the_global_tier",
+      "community": 462,
+      "norm_label": "/ingest-principles \u2014 generalize project judgment into the global tier"
+    },
+    {
+      "label": "Not a move \u2014 citation, not migration",
+      "file_type": "document",
+      "source_file": "skills/ingest-principles/SKILL.md",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "ingest_principles_skill_not_a_move_citation_not_migration",
+      "community": 462,
+      "norm_label": "not a move \u2014 citation, not migration"
+    },
+    {
+      "label": "What counts as \"general\"",
+      "file_type": "document",
+      "source_file": "skills/ingest-principles/SKILL.md",
+      "source_location": "L36",
+      "_origin": "ast",
+      "id": "ingest_principles_skill_what_counts_as_general",
+      "community": 462,
+      "norm_label": "what counts as \"general\""
+    },
+    {
+      "label": "Steps",
+      "file_type": "document",
+      "source_file": "skills/ingest-principles/SKILL.md",
+      "source_location": "L57",
+      "_origin": "ast",
+      "id": "ingest_principles_skill_steps",
+      "community": 462,
+      "norm_label": "steps"
+    },
+    {
+      "label": "Anti-patterns",
+      "file_type": "document",
+      "source_file": "skills/ingest-principles/SKILL.md",
+      "source_location": "L129",
+      "_origin": "ast",
+      "id": "ingest_principles_skill_anti_patterns",
+      "community": 462,
+      "norm_label": "anti-patterns"
+    },
+    {
+      "label": "Hard rules",
+      "file_type": "document",
+      "source_file": "skills/ingest-principles/SKILL.md",
+      "source_location": "L143",
+      "_origin": "ast",
+      "id": "ingest_principles_skill_hard_rules",
+      "community": 462,
+      "norm_label": "hard rules"
+    },
+    {
+      "label": "SKILL.md",
+      "file_type": "document",
+      "source_file": "skills/ingest-session/SKILL.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "ingest_session_skill",
+      "community": 283,
+      "norm_label": "skill.md"
+    },
+    {
+      "label": "/ingest-session \u2014 turn a raw transcript into atomic notes",
+      "file_type": "document",
+      "source_file": "skills/ingest-session/SKILL.md",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "ingest_session_skill_ingest_session_turn_a_raw_transcript_into_atomic_notes",
+      "community": 283,
+      "norm_label": "/ingest-session \u2014 turn a raw transcript into atomic notes"
+    },
+    {
+      "label": "Processed marker: mirrored session summary",
+      "file_type": "document",
+      "source_file": "skills/ingest-session/SKILL.md",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "ingest_session_skill_processed_marker_mirrored_session_summary",
+      "community": 283,
+      "norm_label": "processed marker: mirrored session summary"
+    },
+    {
+      "label": "Trigger logic",
+      "file_type": "document",
+      "source_file": "skills/ingest-session/SKILL.md",
+      "source_location": "L40",
+      "_origin": "ast",
+      "id": "ingest_session_skill_trigger_logic",
+      "community": 283,
+      "norm_label": "trigger logic"
+    },
+    {
+      "label": "Backfill batches",
+      "file_type": "document",
+      "source_file": "skills/ingest-session/SKILL.md",
+      "source_location": "L54",
+      "_origin": "ast",
+      "id": "ingest_session_skill_backfill_batches",
+      "community": 283,
+      "norm_label": "backfill batches"
+    },
+    {
+      "label": "Protecting context",
+      "file_type": "document",
+      "source_file": "skills/ingest-session/SKILL.md",
+      "source_location": "L63",
+      "_origin": "ast",
+      "id": "ingest_session_skill_protecting_context",
+      "community": 283,
+      "norm_label": "protecting context"
+    },
+    {
+      "label": "Extraction pipeline",
+      "file_type": "document",
+      "source_file": "skills/ingest-session/SKILL.md",
+      "source_location": "L73",
+      "_origin": "ast",
+      "id": "ingest_session_skill_extraction_pipeline",
+      "community": 283,
+      "norm_label": "extraction pipeline"
+    },
+    {
+      "label": "Step 1: Read the transcript",
+      "file_type": "document",
+      "source_file": "skills/ingest-session/SKILL.md",
+      "source_location": "L77",
+      "_origin": "ast",
+      "id": "ingest_session_skill_step_1_read_the_transcript",
+      "community": 283,
+      "norm_label": "step 1: read the transcript"
+    },
+    {
+      "label": "Step 2: Extract candidate notes",
+      "file_type": "document",
+      "source_file": "skills/ingest-session/SKILL.md",
+      "source_location": "L84",
+      "_origin": "ast",
+      "id": "ingest_session_skill_step_2_extract_candidate_notes",
+      "community": 283,
+      "norm_label": "step 2: extract candidate notes"
+    },
+    {
+      "label": "Step 3: Dedup against existing notes",
+      "file_type": "document",
+      "source_file": "skills/ingest-session/SKILL.md",
+      "source_location": "L98",
+      "_origin": "ast",
+      "id": "ingest_session_skill_step_3_dedup_against_existing_notes",
+      "community": 283,
+      "norm_label": "step 3: dedup against existing notes"
+    },
+    {
+      "label": "Step 4: Write the note",
+      "file_type": "document",
+      "source_file": "skills/ingest-session/SKILL.md",
+      "source_location": "L115",
+      "_origin": "ast",
+      "id": "ingest_session_skill_step_4_write_the_note",
+      "community": 283,
+      "norm_label": "step 4: write the note"
+    },
+    {
+      "label": "Step 5: Write the session summary (processed marker)",
+      "file_type": "document",
+      "source_file": "skills/ingest-session/SKILL.md",
+      "source_location": "L122",
+      "_origin": "ast",
+      "id": "ingest_session_skill_step_5_write_the_session_summary_processed_marker",
+      "community": 283,
+      "norm_label": "step 5: write the session summary (processed marker)"
+    },
+    {
+      "label": "Step 6: Sync",
+      "file_type": "document",
+      "source_file": "skills/ingest-session/SKILL.md",
+      "source_location": "L154",
+      "_origin": "ast",
+      "id": "ingest_session_skill_step_6_sync",
+      "community": 283,
+      "norm_label": "step 6: sync"
+    },
+    {
+      "label": "Hard rules",
+      "file_type": "document",
+      "source_file": "skills/ingest-session/SKILL.md",
+      "source_location": "L169",
+      "_origin": "ast",
+      "id": "ingest_session_skill_hard_rules",
+      "community": 283,
+      "norm_label": "hard rules"
+    },
+    {
+      "label": "SKILL.md",
+      "file_type": "document",
+      "source_file": "skills/load-memory/SKILL.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "load_memory_skill",
+      "community": 636,
+      "norm_label": "skill.md"
+    },
+    {
+      "label": "/load-memory \u2014 reload project memory from the vault",
+      "file_type": "document",
+      "source_file": "skills/load-memory/SKILL.md",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "load_memory_skill_load_memory_reload_project_memory_from_the_vault",
+      "community": 636,
+      "norm_label": "/load-memory \u2014 reload project memory from the vault"
+    },
+    {
+      "label": "Steps",
+      "file_type": "document",
+      "source_file": "skills/load-memory/SKILL.md",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "load_memory_skill_steps",
+      "community": 636,
+      "norm_label": "steps"
+    },
+    {
+      "label": "Notes",
+      "file_type": "document",
+      "source_file": "skills/load-memory/SKILL.md",
+      "source_location": "L73",
+      "_origin": "ast",
+      "id": "load_memory_skill_notes",
+      "community": 636,
+      "norm_label": "notes"
+    },
+    {
+      "label": "SKILL.md",
+      "file_type": "document",
+      "source_file": "skills/obsidian-cli/SKILL.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "obsidian_cli_skill",
+      "community": 373,
+      "norm_label": "skill.md"
+    },
+    {
+      "label": "Obsidian CLI",
+      "file_type": "document",
+      "source_file": "skills/obsidian-cli/SKILL.md",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "obsidian_cli_skill_obsidian_cli",
+      "community": 373,
+      "norm_label": "obsidian cli"
+    },
+    {
+      "label": "Command reference",
+      "file_type": "document",
+      "source_file": "skills/obsidian-cli/SKILL.md",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "obsidian_cli_skill_command_reference",
+      "community": 373,
+      "norm_label": "command reference"
+    },
+    {
+      "label": "Syntax",
+      "file_type": "document",
+      "source_file": "skills/obsidian-cli/SKILL.md",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "obsidian_cli_skill_syntax",
+      "community": 373,
+      "norm_label": "syntax"
+    },
+    {
+      "label": "File targeting",
+      "file_type": "document",
+      "source_file": "skills/obsidian-cli/SKILL.md",
+      "source_location": "L30",
+      "_origin": "ast",
+      "id": "obsidian_cli_skill_file_targeting",
+      "community": 373,
+      "norm_label": "file targeting"
+    },
+    {
+      "label": "Vault targeting",
+      "file_type": "document",
+      "source_file": "skills/obsidian-cli/SKILL.md",
+      "source_location": "L37",
+      "_origin": "ast",
+      "id": "obsidian_cli_skill_vault_targeting",
+      "community": 373,
+      "norm_label": "vault targeting"
+    },
+    {
+      "label": "Common patterns",
+      "file_type": "document",
+      "source_file": "skills/obsidian-cli/SKILL.md",
+      "source_location": "L45",
+      "_origin": "ast",
+      "id": "obsidian_cli_skill_common_patterns",
+      "community": 373,
+      "norm_label": "common patterns"
+    },
+    {
+      "label": "Plugin development",
+      "file_type": "document",
+      "source_file": "skills/obsidian-cli/SKILL.md",
+      "source_location": "L62",
+      "_origin": "ast",
+      "id": "obsidian_cli_skill_plugin_development",
+      "community": 373,
+      "norm_label": "plugin development"
+    },
+    {
+      "label": "Develop/test cycle",
+      "file_type": "document",
+      "source_file": "skills/obsidian-cli/SKILL.md",
+      "source_location": "L64",
+      "_origin": "ast",
+      "id": "obsidian_cli_skill_develop_test_cycle",
+      "community": 373,
+      "norm_label": "develop/test cycle"
+    },
+    {
+      "label": "Additional developer commands",
+      "file_type": "document",
+      "source_file": "skills/obsidian-cli/SKILL.md",
+      "source_location": "L86",
+      "_origin": "ast",
+      "id": "obsidian_cli_skill_additional_developer_commands",
+      "community": 373,
+      "norm_label": "additional developer commands"
+    },
+    {
+      "label": "SKILL.md",
+      "file_type": "document",
+      "source_file": "skills/save-memory/SKILL.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "save_memory_skill",
+      "community": 640,
+      "norm_label": "skill.md"
+    },
+    {
+      "label": "/save-memory \u2014 persist this session into the vault",
+      "file_type": "document",
+      "source_file": "skills/save-memory/SKILL.md",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "save_memory_skill_save_memory_persist_this_session_into_the_vault",
+      "community": 640,
+      "norm_label": "/save-memory \u2014 persist this session into the vault"
+    },
+    {
+      "label": "Steps",
+      "file_type": "document",
+      "source_file": "skills/save-memory/SKILL.md",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "save_memory_skill_steps",
+      "community": 640,
+      "norm_label": "steps"
+    },
+    {
+      "label": "Notes",
+      "file_type": "document",
+      "source_file": "skills/save-memory/SKILL.md",
+      "source_location": "L130",
+      "_origin": "ast",
+      "id": "save_memory_skill_notes",
+      "community": 640,
+      "norm_label": "notes"
+    },
+    {
+      "label": "LESSONS.md",
+      "file_type": "document",
+      "source_file": "skills/skill-learning/LESSONS.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "skill_learning_lessons",
+      "community": 203,
+      "norm_label": "lessons.md"
+    },
+    {
+      "label": "Lessons: writing self-improving agent skills",
+      "file_type": "document",
+      "source_file": "skills/skill-learning/LESSONS.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "skill_learning_lessons_lessons_writing_self_improving_agent_skills",
+      "community": 203,
+      "norm_label": "lessons: writing self-improving agent skills"
+    },
+    {
+      "label": "Lesson 1: Write principles, not rules",
+      "file_type": "document",
+      "source_file": "skills/skill-learning/LESSONS.md",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "skill_learning_lessons_lesson_1_write_principles_not_rules",
+      "community": 203,
+      "norm_label": "lesson 1: write principles, not rules"
+    },
+    {
+      "label": "Lesson 2: Teach how to learn",
+      "file_type": "document",
+      "source_file": "skills/skill-learning/LESSONS.md",
+      "source_location": "L37",
+      "_origin": "ast",
+      "id": "skill_learning_lessons_lesson_2_teach_how_to_learn",
+      "community": 203,
+      "norm_label": "lesson 2: teach how to learn"
+    },
+    {
+      "label": "Skill snapshot referenced in the talk",
+      "file_type": "document",
+      "source_file": "skills/skill-learning/LESSONS.md",
+      "source_location": "L54",
+      "_origin": "ast",
+      "id": "skill_learning_lessons_skill_snapshot_referenced_in_the_talk",
+      "community": 203,
+      "norm_label": "skill snapshot referenced in the talk"
+    },
+    {
+      "label": "The `reply-learning` gist, summarized",
+      "file_type": "document",
+      "source_file": "skills/skill-learning/LESSONS.md",
+      "source_location": "L75",
+      "_origin": "ast",
+      "id": "skill_learning_lessons_the_reply_learning_gist_summarized",
+      "community": 203,
+      "norm_label": "the `reply-learning` gist, summarized"
+    },
+    {
+      "label": "Applied in this repo",
+      "file_type": "document",
+      "source_file": "skills/skill-learning/LESSONS.md",
+      "source_location": "L116",
+      "_origin": "ast",
+      "id": "skill_learning_lessons_applied_in_this_repo",
+      "community": 203,
+      "norm_label": "applied in this repo"
+    },
+    {
+      "label": "SKILL.md",
+      "file_type": "document",
+      "source_file": "skills/skill-learning/SKILL.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "skill_learning_skill",
+      "community": 203,
+      "norm_label": "skill.md"
+    },
+    {
+      "label": "/skill-learning \u2014 turn skill friction into sharper principles",
+      "file_type": "document",
+      "source_file": "skills/skill-learning/SKILL.md",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "skill_learning_skill_skill_learning_turn_skill_friction_into_sharper_principles",
+      "community": 203,
+      "norm_label": "/skill-learning \u2014 turn skill friction into sharper principles"
+    },
+    {
+      "label": "When this triggers",
+      "file_type": "document",
+      "source_file": "skills/skill-learning/SKILL.md",
+      "source_location": "L24",
+      "_origin": "ast",
+      "id": "skill_learning_skill_when_this_triggers",
+      "community": 203,
+      "norm_label": "when this triggers"
+    },
+    {
+      "label": "Process",
+      "file_type": "document",
+      "source_file": "skills/skill-learning/SKILL.md",
+      "source_location": "L40",
+      "_origin": "ast",
+      "id": "skill_learning_skill_process",
+      "community": 2,
+      "norm_label": "process"
+    },
+    {
+      "label": "1. Identify what went wrong (or right)",
+      "file_type": "document",
+      "source_file": "skills/skill-learning/SKILL.md",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "skill_learning_skill_1_identify_what_went_wrong_or_right",
+      "community": 2,
+      "norm_label": "1. identify what went wrong (or right)"
+    },
+    {
+      "label": "2. Ask: why?",
+      "file_type": "document",
+      "source_file": "skills/skill-learning/SKILL.md",
+      "source_location": "L48",
+      "_origin": "ast",
+      "id": "skill_learning_skill_2_ask_why",
+      "community": 2,
+      "norm_label": "2. ask: why?"
+    },
+    {
+      "label": "3. Zoom out to the pattern",
+      "file_type": "document",
+      "source_file": "skills/skill-learning/SKILL.md",
+      "source_location": "L56",
+      "_origin": "ast",
+      "id": "skill_learning_skill_3_zoom_out_to_the_pattern",
+      "community": 2,
+      "norm_label": "3. zoom out to the pattern"
+    },
+    {
+      "label": "4. Check against existing principles",
+      "file_type": "document",
+      "source_file": "skills/skill-learning/SKILL.md",
+      "source_location": "L64",
+      "_origin": "ast",
+      "id": "skill_learning_skill_4_check_against_existing_principles",
+      "community": 2,
+      "norm_label": "4. check against existing principles"
+    },
+    {
+      "label": "5. Write it as a principle, not a rule",
+      "file_type": "document",
+      "source_file": "skills/skill-learning/SKILL.md",
+      "source_location": "L74",
+      "_origin": "ast",
+      "id": "skill_learning_skill_5_write_it_as_a_principle_not_a_rule",
+      "community": 2,
+      "norm_label": "5. write it as a principle, not a rule"
+    },
+    {
+      "label": "6. Place it where it belongs",
+      "file_type": "document",
+      "source_file": "skills/skill-learning/SKILL.md",
+      "source_location": "L84",
+      "_origin": "ast",
+      "id": "skill_learning_skill_6_place_it_where_it_belongs",
+      "community": 2,
+      "norm_label": "6. place it where it belongs"
+    },
+    {
+      "label": "7. Edit and commit",
+      "file_type": "document",
+      "source_file": "skills/skill-learning/SKILL.md",
+      "source_location": "L100",
+      "_origin": "ast",
+      "id": "skill_learning_skill_7_edit_and_commit",
+      "community": 2,
+      "norm_label": "7. edit and commit"
+    },
+    {
+      "label": "Anti-patterns",
+      "file_type": "document",
+      "source_file": "skills/skill-learning/SKILL.md",
+      "source_location": "L107",
+      "_origin": "ast",
+      "id": "skill_learning_skill_anti_patterns",
+      "community": 203,
+      "norm_label": "anti-patterns"
+    },
+    {
+      "label": "Hard rules",
+      "file_type": "document",
+      "source_file": "skills/skill-learning/SKILL.md",
+      "source_location": "L121",
+      "_origin": "ast",
+      "id": "skill_learning_skill_hard_rules",
+      "community": 203,
+      "norm_label": "hard rules"
+    },
+    {
+      "label": "CLAUDE.md",
+      "file_type": "document",
+      "source_file": "vault/CLAUDE.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "vault_claude",
+      "community": 317,
+      "norm_label": "claude.md"
+    },
+    {
+      "label": "Vault \u2014 Instructions for Claude Code",
+      "file_type": "document",
+      "source_file": "vault/CLAUDE.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "vault_claude_vault_instructions_for_claude_code",
+      "community": 317,
+      "norm_label": "vault \u2014 instructions for claude code"
+    },
+    {
+      "label": "What is this vault",
+      "file_type": "document",
+      "source_file": "vault/CLAUDE.md",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "vault_claude_what_is_this_vault",
+      "community": 317,
+      "norm_label": "what is this vault"
+    },
+    {
+      "label": "Structure \u2014 what is / isn't graphed",
+      "file_type": "document",
+      "source_file": "vault/CLAUDE.md",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "vault_claude_structure_what_is_isn_t_graphed",
+      "community": 317,
+      "norm_label": "structure \u2014 what is / isn't graphed"
+    },
+    {
+      "label": "Project stacks",
+      "file_type": "document",
+      "source_file": "vault/CLAUDE.md",
+      "source_location": "L61",
+      "_origin": "ast",
+      "id": "vault_claude_project_stacks",
+      "community": 317,
+      "norm_label": "project stacks"
+    },
+    {
+      "label": "Zettelkasten Rules",
+      "file_type": "document",
+      "source_file": "vault/CLAUDE.md",
+      "source_location": "L64",
+      "_origin": "ast",
+      "id": "vault_claude_zettelkasten_rules",
+      "community": 317,
+      "norm_label": "zettelkasten rules"
+    },
+    {
+      "label": "Note creation",
+      "file_type": "document",
+      "source_file": "vault/CLAUDE.md",
+      "source_location": "L66",
+      "_origin": "ast",
+      "id": "vault_claude_note_creation",
+      "community": 317,
+      "norm_label": "note creation"
+    },
+    {
+      "label": "Standard frontmatter",
+      "file_type": "document",
+      "source_file": "vault/CLAUDE.md",
+      "source_location": "L73",
+      "_origin": "ast",
+      "id": "vault_claude_standard_frontmatter",
+      "community": 317,
+      "norm_label": "standard frontmatter"
+    },
+    {
+      "label": "Never do",
+      "file_type": "document",
+      "source_file": "vault/CLAUDE.md",
+      "source_location": "L85",
+      "_origin": "ast",
+      "id": "vault_claude_never_do",
+      "community": 317,
+      "norm_label": "never do"
+    },
+    {
+      "label": "Session Commands",
+      "file_type": "document",
+      "source_file": "vault/CLAUDE.md",
+      "source_location": "L91",
+      "_origin": "ast",
+      "id": "vault_claude_session_commands",
+      "community": 317,
+      "norm_label": "session commands"
+    },
+    {
+      "label": "Session transcripts (chats) and their distillation (sessions)",
+      "file_type": "document",
+      "source_file": "vault/CLAUDE.md",
+      "source_location": "L100",
+      "_origin": "ast",
+      "id": "vault_claude_session_transcripts_chats_and_their_distillation_sessions",
+      "community": 317,
+      "norm_label": "session transcripts (chats) and their distillation (sessions)"
+    },
+    {
+      "label": "Graphify (memory graphs vs code-map notes \u2014 don't confuse them)",
+      "file_type": "document",
+      "source_file": "vault/CLAUDE.md",
+      "source_location": "L117",
+      "_origin": "ast",
+      "id": "vault_claude_graphify_memory_graphs_vs_code_map_notes_don_t_confuse_them",
+      "community": 317,
+      "norm_label": "graphify (memory graphs vs code-map notes \u2014 don't confuse them)"
     }
   ],
   "links": [
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L172",
-      "weight": 1.0,
-      "source": "scripts_claude_to_obsidian",
-      "target": "scripts_claude_to_obsidian_build_frontmatter",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L198",
-      "weight": 1.0,
-      "source": "scripts_claude_to_obsidian",
-      "target": "scripts_claude_to_obsidian_collect_vault_notes",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L124",
-      "weight": 1.0,
-      "source": "scripts_claude_to_obsidian",
-      "target": "scripts_claude_to_obsidian_detect_origin",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L138",
-      "weight": 1.0,
-      "source": "scripts_claude_to_obsidian",
-      "target": "scripts_claude_to_obsidian_extract_tags",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L214",
-      "weight": 1.0,
-      "source": "scripts_claude_to_obsidian",
-      "target": "scripts_claude_to_obsidian_insert_wikilinks",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L296",
-      "weight": 1.0,
-      "source": "scripts_claude_to_obsidian",
-      "target": "scripts_claude_to_obsidian_main",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L244",
-      "weight": 1.0,
-      "source": "scripts_claude_to_obsidian",
-      "target": "scripts_claude_to_obsidian_process_file",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L154",
-      "weight": 1.0,
-      "source": "scripts_claude_to_obsidian",
-      "target": "scripts_claude_to_obsidian_strip_existing_frontmatter",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "context": "parameter_type",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L124",
-      "weight": 1.0,
-      "source": "scripts_claude_to_obsidian_detect_origin",
-      "target": "path",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L257",
-      "weight": 1.0,
-      "source": "scripts_claude_to_obsidian_process_file",
-      "target": "scripts_claude_to_obsidian_detect_origin",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L125",
-      "weight": 1.0,
-      "source": "scripts_claude_to_obsidian_rationale_125",
-      "target": "scripts_claude_to_obsidian_detect_origin",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "context": "parameter_type",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L198",
-      "weight": 1.0,
-      "source": "scripts_claude_to_obsidian_collect_vault_notes",
-      "target": "path",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "context": "parameter_type",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L244",
-      "weight": 1.0,
-      "source": "scripts_claude_to_obsidian_process_file",
-      "target": "path",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L258",
-      "weight": 1.0,
-      "source": "scripts_claude_to_obsidian_process_file",
-      "target": "scripts_claude_to_obsidian_extract_tags",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L139",
-      "weight": 1.0,
-      "source": "scripts_claude_to_obsidian_rationale_139",
-      "target": "scripts_claude_to_obsidian_extract_tags",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L255",
-      "weight": 1.0,
-      "source": "scripts_claude_to_obsidian_process_file",
-      "target": "scripts_claude_to_obsidian_strip_existing_frontmatter",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L155",
-      "weight": 1.0,
-      "source": "scripts_claude_to_obsidian_rationale_155",
-      "target": "scripts_claude_to_obsidian_strip_existing_frontmatter",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L270",
-      "weight": 1.0,
-      "source": "scripts_claude_to_obsidian_process_file",
-      "target": "scripts_claude_to_obsidian_build_frontmatter",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L178",
-      "weight": 1.0,
-      "source": "scripts_claude_to_obsidian_rationale_178",
-      "target": "scripts_claude_to_obsidian_build_frontmatter",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/claude_to_obsidian.py",
+      "source_file": "scripts/claude_to_vault.py",
       "source_location": "L336",
       "weight": 1.0,
-      "source": "scripts_claude_to_obsidian_main",
-      "target": "scripts_claude_to_obsidian_collect_vault_notes",
-      "confidence_score": 1.0
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault",
+      "target": "scripts_claude_to_vault_already_exported"
     },
     {
-      "relation": "rationale_for",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "scripts/claude_to_obsidian.py",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L98",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault",
+      "target": "scripts_claude_to_vault_assistant_blocks"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
       "source_location": "L199",
       "weight": 1.0,
-      "source": "scripts_claude_to_obsidian_rationale_199",
-      "target": "scripts_claude_to_obsidian_collect_vault_notes",
-      "confidence_score": 1.0
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault",
+      "target": "scripts_claude_to_vault_collect_sessions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L159",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault",
+      "target": "scripts_claude_to_vault_dedup_sort"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L351",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault",
+      "target": "scripts_claude_to_vault_dest_path"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L324",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault",
+      "target": "scripts_claude_to_vault_ensure_project_dirs"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L173",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault",
+      "target": "scripts_claude_to_vault_find_main_transcripts"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L187",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault",
+      "target": "scripts_claude_to_vault_find_subagent_transcripts"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L66",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault",
+      "target": "scripts_claude_to_vault_iter_json"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L429",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault",
+      "target": "scripts_claude_to_vault_main"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L116",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault",
+      "target": "scripts_claude_to_vault_parse_session"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L57",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault",
+      "target": "scripts_claude_to_vault_parse_timestamp"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L359",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault",
+      "target": "scripts_claude_to_vault_render"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L297",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault",
+      "target": "scripts_claude_to_vault_resolve_project"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L260",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault",
+      "target": "scripts_claude_to_vault_session_behavior"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L313",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault",
+      "target": "scripts_claude_to_vault_slugify"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L81",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault",
+      "target": "scripts_claude_to_vault_user_text"
     },
     {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L267",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L448",
       "weight": 1.0,
-      "source": "scripts_claude_to_obsidian_process_file",
-      "target": "scripts_claude_to_obsidian_insert_wikilinks",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L215",
-      "weight": 1.0,
-      "source": "scripts_claude_to_obsidian_rationale_215",
-      "target": "scripts_claude_to_obsidian_insert_wikilinks",
-      "confidence_score": 1.0
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault_main",
+      "target": "scripts_claude_to_vault_parse_timestamp"
     },
     {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L353",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L139",
       "weight": 1.0,
-      "source": "scripts_claude_to_obsidian_main",
-      "target": "scripts_claude_to_obsidian_process_file",
-      "confidence_score": 1.0
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault_parse_session",
+      "target": "scripts_claude_to_vault_parse_timestamp"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L130",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault_parse_session",
+      "target": "scripts_claude_to_vault_iter_json"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L142",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault_parse_session",
+      "target": "scripts_claude_to_vault_user_text"
     },
     {
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
-      "source_file": "scripts/claude_to_obsidian.py",
-      "source_location": "L253",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L82",
       "weight": 1.0,
-      "source": "scripts_claude_to_obsidian_rationale_253",
-      "target": "scripts_claude_to_obsidian_process_file",
-      "confidence_score": 1.0
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault_rationale_82",
+      "target": "scripts_claude_to_vault_user_text"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L146",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault_parse_session",
+      "target": "scripts_claude_to_vault_assistant_blocks"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L99",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault_rationale_99",
+      "target": "scripts_claude_to_vault_assistant_blocks"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L207",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault_collect_sessions",
+      "target": "scripts_claude_to_vault_parse_session"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L117",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault_rationale_117",
+      "target": "scripts_claude_to_vault_parse_session"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L236",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault_collect_sessions",
+      "target": "scripts_claude_to_vault_dedup_sort"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L160",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault_rationale_160",
+      "target": "scripts_claude_to_vault_dedup_sort"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L206",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault_collect_sessions",
+      "target": "scripts_claude_to_vault_find_main_transcripts"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L174",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault_rationale_174",
+      "target": "scripts_claude_to_vault_find_main_transcripts"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L220",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault_collect_sessions",
+      "target": "scripts_claude_to_vault_find_subagent_transcripts"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L188",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault_rationale_188",
+      "target": "scripts_claude_to_vault_find_subagent_transcripts"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L461",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault_main",
+      "target": "scripts_claude_to_vault_collect_sessions"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L200",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault_rationale_200",
+      "target": "scripts_claude_to_vault_collect_sessions"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L360",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault_render",
+      "target": "scripts_claude_to_vault_session_behavior"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L468",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault_main",
+      "target": "scripts_claude_to_vault_resolve_project"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L298",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault_rationale_298",
+      "target": "scripts_claude_to_vault_resolve_project"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L364",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault_render",
+      "target": "scripts_claude_to_vault_slugify"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L479",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault_main",
+      "target": "scripts_claude_to_vault_ensure_project_dirs"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L325",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault_rationale_325",
+      "target": "scripts_claude_to_vault_ensure_project_dirs"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L481",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault_main",
+      "target": "scripts_claude_to_vault_already_exported"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L337",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault_rationale_337",
+      "target": "scripts_claude_to_vault_already_exported"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L485",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault_main",
+      "target": "scripts_claude_to_vault_dest_path"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/claude_to_vault.py",
+      "source_location": "L472",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_claude_to_vault_main",
+      "target": "scripts_claude_to_vault_render"
     },
     {
       "relation": "contains",
@@ -567,9 +2014,9 @@
       "source_file": "scripts/obsidian-query.sh",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_obsidian_query",
-      "target": "home_hfeng1_claude_code_memory_setup_scripts_obsidian_query_sh__entry",
-      "confidence_score": 1.0
+      "target": "home_hfeng1_claude_code_memory_setup_scripts_obsidian_query_sh__entry"
     },
     {
       "relation": "defines",
@@ -577,9 +2024,9 @@
       "source_file": "scripts/obsidian-query.sh",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_obsidian_query",
-      "target": "scripts_obsidian_query_display",
-      "confidence_score": 1.0
+      "target": "scripts_obsidian_query_display"
     },
     {
       "relation": "defines",
@@ -587,9 +2034,9 @@
       "source_file": "scripts/obsidian-query.sh",
       "source_location": "L18",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_obsidian_query",
-      "target": "scripts_obsidian_query_xdg_runtime_dir",
-      "confidence_score": 1.0
+      "target": "scripts_obsidian_query_xdg_runtime_dir"
     },
     {
       "relation": "contains",
@@ -597,9 +2044,9 @@
       "source_file": "scripts/setup.sh",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_setup",
-      "target": "home_hfeng1_claude_code_memory_setup_scripts_setup_sh__entry",
-      "confidence_score": 1.0
+      "target": "home_hfeng1_claude_code_memory_setup_scripts_setup_sh__entry"
     },
     {
       "relation": "defines",
@@ -607,9 +2054,9 @@
       "source_file": "scripts/setup.sh",
       "source_location": "L54",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_setup",
-      "target": "scripts_setup_install_template",
-      "confidence_score": 1.0
+      "target": "scripts_setup_install_template"
     },
     {
       "relation": "calls",
@@ -618,21 +2065,1071 @@
       "source_location": "L63",
       "weight": 1.0,
       "context": "call",
+      "confidence_score": 1.0,
       "source": "home_hfeng1_claude_code_memory_setup_scripts_setup_sh__entry",
-      "target": "scripts_setup_install_template",
-      "confidence_score": 1.0
+      "target": "scripts_setup_install_template"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "scripts/sync_claude_obsidian.sh",
+      "source_file": "scripts/sync_claude_vault.sh",
       "source_location": "L1",
       "weight": 1.0,
-      "source": "scripts_sync_claude_obsidian",
-      "target": "home_hfeng1_claude_code_memory_setup_scripts_sync_claude_obsidian_sh__entry",
+      "source": "scripts_sync_claude_vault",
+      "target": "home_hfeng1_claude_code_memory_setup_scripts_sync_claude_vault_sh__entry",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L252",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme",
+      "target": "global_claude"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme",
+      "target": "readme_claude_code_memory_setup"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L281",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_claude_code_memory_setup",
+      "target": "readme_credits_links"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L250",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_claude_code_memory_setup",
+      "target": "readme_design_notes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L116",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_claude_code_memory_setup",
+      "target": "readme_install"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L146",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_claude_code_memory_setup",
+      "target": "readme_the_memory_layer"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_claude_code_memory_setup",
+      "target": "readme_the_pipeline"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L170",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_claude_code_memory_setup",
+      "target": "readme_usage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L93",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_claude_code_memory_setup",
+      "target": "readme_what_s_in_this_repo"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L59",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_the_pipeline",
+      "target": "readme_how_a_question_is_answered"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L76",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_the_pipeline",
+      "target": "readme_two_caches_two_invalidations"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L188",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_usage",
+      "target": "readme_ingest_principles_generalize_project_notes_into_the_global_tier"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L213",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_usage",
+      "target": "readme_load_memory_reload_a_project_s_memory"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L236",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_usage",
+      "target": "readme_promoting_memory_the_portable_repo_graph"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L221",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_usage",
+      "target": "readme_querying_by_hand"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L172",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_usage",
+      "target": "readme_save_memory_ingest_session_write_the_session_into_memory"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L201",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_usage",
+      "target": "readme_skill_learning_turn_friction_with_these_skills_into_sharper_judgment"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L266",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_design_notes",
+      "target": "readme_graphify_support_implemented"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "global_claude",
+      "target": "global_claude_git_commits"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "global_claude",
+      "target": "global_claude_graphify"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "global_claude_graphify",
+      "target": "global_claude_context_navigation_memory_graphify"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L250",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "global_claude_context_navigation_memory_graphify",
+      "target": "global_claude_do_not"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L225",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "global_claude_context_navigation_memory_graphify",
+      "target": "global_claude_graduating_memory_the_global_tier_ingest_principles"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L205",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "global_claude_context_navigation_memory_graphify",
+      "target": "global_claude_graduating_memory_the_portable_repo_l1_link_doc_into_a_repo_doc"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L181",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "global_claude_context_navigation_memory_graphify",
+      "target": "global_claude_memory_tiers_query_first_no_auto_injection"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L106",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "global_claude_context_navigation_memory_graphify",
+      "target": "global_claude_querying_l1_graphify"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L112",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "global_claude_context_navigation_memory_graphify",
+      "target": "global_claude_querying_l2_raw_and_when_to_descend"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L79",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "global_claude_context_navigation_memory_graphify",
+      "target": "global_claude_representation_domain_still_a_2_2_but_one_query_surface_per_project"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L95",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "global_claude_context_navigation_memory_graphify",
+      "target": "global_claude_route_a_question"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "global_claude_context_navigation_memory_graphify",
+      "target": "global_claude_the_graphs_a_pipeline_of_artifacts_one_query_surface_per_project"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L158",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "global_claude_context_navigation_memory_graphify",
+      "target": "global_claude_the_sync_process_keep_merged_repo_memory_bridges_fresh"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L146",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "global_claude_context_navigation_memory_graphify",
+      "target": "global_claude_two_caches_two_invalidations"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L239",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "global_claude_context_navigation_memory_graphify",
+      "target": "global_claude_when_to_rebuild"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "global-CLAUDE.md",
+      "source_location": "L192",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "global_claude_context_navigation_memory_graphify",
+      "target": "global_claude_writing_memory_save_memory_ingest_session"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_readme",
+      "target": "scripts_readme_scripts"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/README.md",
+      "source_location": "L63",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_readme_scripts",
+      "target": "scripts_readme_cron_setup_optional"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/README.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_readme_scripts",
+      "target": "scripts_readme_files"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/README.md",
+      "source_location": "L74",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_readme_scripts",
+      "target": "scripts_readme_filter_in_obsidian_graph_view"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/README.md",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_readme_scripts",
+      "target": "scripts_readme_how_it_works"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/README.md",
+      "source_location": "L81",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_readme_scripts",
+      "target": "scripts_readme_troubleshooting"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/README.md",
+      "source_location": "L36",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_readme_scripts",
+      "target": "scripts_readme_usage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/ingest-principles/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ingest_principles_skill",
+      "target": "ingest_principles_skill_ingest_principles_generalize_project_judgment_into_the_global_tier"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/ingest-principles/SKILL.md",
+      "source_location": "L129",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ingest_principles_skill_ingest_principles_generalize_project_judgment_into_the_global_tier",
+      "target": "ingest_principles_skill_anti_patterns"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/ingest-principles/SKILL.md",
+      "source_location": "L143",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ingest_principles_skill_ingest_principles_generalize_project_judgment_into_the_global_tier",
+      "target": "ingest_principles_skill_hard_rules"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/ingest-principles/SKILL.md",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ingest_principles_skill_ingest_principles_generalize_project_judgment_into_the_global_tier",
+      "target": "ingest_principles_skill_not_a_move_citation_not_migration"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/ingest-principles/SKILL.md",
+      "source_location": "L57",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ingest_principles_skill_ingest_principles_generalize_project_judgment_into_the_global_tier",
+      "target": "ingest_principles_skill_steps"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/ingest-principles/SKILL.md",
+      "source_location": "L36",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ingest_principles_skill_ingest_principles_generalize_project_judgment_into_the_global_tier",
+      "target": "ingest_principles_skill_what_counts_as_general"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/ingest-session/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ingest_session_skill",
+      "target": "ingest_session_skill_ingest_session_turn_a_raw_transcript_into_atomic_notes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/ingest-session/SKILL.md",
+      "source_location": "L73",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ingest_session_skill_ingest_session_turn_a_raw_transcript_into_atomic_notes",
+      "target": "ingest_session_skill_extraction_pipeline"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/ingest-session/SKILL.md",
+      "source_location": "L169",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ingest_session_skill_ingest_session_turn_a_raw_transcript_into_atomic_notes",
+      "target": "ingest_session_skill_hard_rules"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/ingest-session/SKILL.md",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ingest_session_skill_ingest_session_turn_a_raw_transcript_into_atomic_notes",
+      "target": "ingest_session_skill_processed_marker_mirrored_session_summary"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/ingest-session/SKILL.md",
+      "source_location": "L40",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ingest_session_skill_ingest_session_turn_a_raw_transcript_into_atomic_notes",
+      "target": "ingest_session_skill_trigger_logic"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/ingest-session/SKILL.md",
+      "source_location": "L54",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ingest_session_skill_trigger_logic",
+      "target": "ingest_session_skill_backfill_batches"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/ingest-session/SKILL.md",
+      "source_location": "L63",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ingest_session_skill_trigger_logic",
+      "target": "ingest_session_skill_protecting_context"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/ingest-session/SKILL.md",
+      "source_location": "L77",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ingest_session_skill_extraction_pipeline",
+      "target": "ingest_session_skill_step_1_read_the_transcript"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/ingest-session/SKILL.md",
+      "source_location": "L84",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ingest_session_skill_extraction_pipeline",
+      "target": "ingest_session_skill_step_2_extract_candidate_notes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/ingest-session/SKILL.md",
+      "source_location": "L98",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ingest_session_skill_extraction_pipeline",
+      "target": "ingest_session_skill_step_3_dedup_against_existing_notes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/ingest-session/SKILL.md",
+      "source_location": "L115",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ingest_session_skill_extraction_pipeline",
+      "target": "ingest_session_skill_step_4_write_the_note"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/ingest-session/SKILL.md",
+      "source_location": "L122",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ingest_session_skill_extraction_pipeline",
+      "target": "ingest_session_skill_step_5_write_the_session_summary_processed_marker"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/ingest-session/SKILL.md",
+      "source_location": "L154",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ingest_session_skill_extraction_pipeline",
+      "target": "ingest_session_skill_step_6_sync"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/load-memory/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "load_memory_skill",
+      "target": "load_memory_skill_load_memory_reload_project_memory_from_the_vault"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/load-memory/SKILL.md",
+      "source_location": "L73",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "load_memory_skill_load_memory_reload_project_memory_from_the_vault",
+      "target": "load_memory_skill_notes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/load-memory/SKILL.md",
+      "source_location": "L17",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "load_memory_skill_load_memory_reload_project_memory_from_the_vault",
+      "target": "load_memory_skill_steps"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/obsidian-cli/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "obsidian_cli_skill",
+      "target": "obsidian_cli_skill_obsidian_cli"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/obsidian-cli/SKILL.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "obsidian_cli_skill_obsidian_cli",
+      "target": "obsidian_cli_skill_command_reference"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/obsidian-cli/SKILL.md",
+      "source_location": "L45",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "obsidian_cli_skill_obsidian_cli",
+      "target": "obsidian_cli_skill_common_patterns"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/obsidian-cli/SKILL.md",
+      "source_location": "L30",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "obsidian_cli_skill_obsidian_cli",
+      "target": "obsidian_cli_skill_file_targeting"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/obsidian-cli/SKILL.md",
+      "source_location": "L62",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "obsidian_cli_skill_obsidian_cli",
+      "target": "obsidian_cli_skill_plugin_development"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/obsidian-cli/SKILL.md",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "obsidian_cli_skill_obsidian_cli",
+      "target": "obsidian_cli_skill_syntax"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/obsidian-cli/SKILL.md",
+      "source_location": "L37",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "obsidian_cli_skill_obsidian_cli",
+      "target": "obsidian_cli_skill_vault_targeting"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/obsidian-cli/SKILL.md",
+      "source_location": "L86",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "obsidian_cli_skill_plugin_development",
+      "target": "obsidian_cli_skill_additional_developer_commands"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/obsidian-cli/SKILL.md",
+      "source_location": "L64",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "obsidian_cli_skill_plugin_development",
+      "target": "obsidian_cli_skill_develop_test_cycle"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/save-memory/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "save_memory_skill",
+      "target": "save_memory_skill_save_memory_persist_this_session_into_the_vault"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/save-memory/SKILL.md",
+      "source_location": "L130",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "save_memory_skill_save_memory_persist_this_session_into_the_vault",
+      "target": "save_memory_skill_notes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/save-memory/SKILL.md",
+      "source_location": "L22",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "save_memory_skill_save_memory_persist_this_session_into_the_vault",
+      "target": "save_memory_skill_steps"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/skill-learning/LESSONS.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "skill_learning_lessons",
+      "target": "skill_learning_lessons_lessons_writing_self_improving_agent_skills"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/skill-learning/LESSONS.md",
+      "source_location": "L118",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "skill_learning_lessons",
+      "target": "skill_learning_skill"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/skill-learning/LESSONS.md",
+      "source_location": "L116",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "skill_learning_lessons_lessons_writing_self_improving_agent_skills",
+      "target": "skill_learning_lessons_applied_in_this_repo"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/skill-learning/LESSONS.md",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "skill_learning_lessons_lessons_writing_self_improving_agent_skills",
+      "target": "skill_learning_lessons_lesson_1_write_principles_not_rules"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/skill-learning/LESSONS.md",
+      "source_location": "L37",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "skill_learning_lessons_lessons_writing_self_improving_agent_skills",
+      "target": "skill_learning_lessons_lesson_2_teach_how_to_learn"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/skill-learning/LESSONS.md",
+      "source_location": "L54",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "skill_learning_lessons_lessons_writing_self_improving_agent_skills",
+      "target": "skill_learning_lessons_skill_snapshot_referenced_in_the_talk"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/skill-learning/LESSONS.md",
+      "source_location": "L75",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "skill_learning_lessons_lessons_writing_self_improving_agent_skills",
+      "target": "skill_learning_lessons_the_reply_learning_gist_summarized"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/skill-learning/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "skill_learning_skill",
+      "target": "skill_learning_skill_skill_learning_turn_skill_friction_into_sharper_principles"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/skill-learning/SKILL.md",
+      "source_location": "L107",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "skill_learning_skill_skill_learning_turn_skill_friction_into_sharper_principles",
+      "target": "skill_learning_skill_anti_patterns"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/skill-learning/SKILL.md",
+      "source_location": "L121",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "skill_learning_skill_skill_learning_turn_skill_friction_into_sharper_principles",
+      "target": "skill_learning_skill_hard_rules"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/skill-learning/SKILL.md",
+      "source_location": "L40",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "skill_learning_skill_skill_learning_turn_skill_friction_into_sharper_principles",
+      "target": "skill_learning_skill_process"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/skill-learning/SKILL.md",
+      "source_location": "L24",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "skill_learning_skill_skill_learning_turn_skill_friction_into_sharper_principles",
+      "target": "skill_learning_skill_when_this_triggers"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/skill-learning/SKILL.md",
+      "source_location": "L42",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "skill_learning_skill_process",
+      "target": "skill_learning_skill_1_identify_what_went_wrong_or_right"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/skill-learning/SKILL.md",
+      "source_location": "L48",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "skill_learning_skill_process",
+      "target": "skill_learning_skill_2_ask_why"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/skill-learning/SKILL.md",
+      "source_location": "L56",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "skill_learning_skill_process",
+      "target": "skill_learning_skill_3_zoom_out_to_the_pattern"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/skill-learning/SKILL.md",
+      "source_location": "L64",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "skill_learning_skill_process",
+      "target": "skill_learning_skill_4_check_against_existing_principles"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/skill-learning/SKILL.md",
+      "source_location": "L74",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "skill_learning_skill_process",
+      "target": "skill_learning_skill_5_write_it_as_a_principle_not_a_rule"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/skill-learning/SKILL.md",
+      "source_location": "L84",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "skill_learning_skill_process",
+      "target": "skill_learning_skill_6_place_it_where_it_belongs"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "skills/skill-learning/SKILL.md",
+      "source_location": "L100",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "skill_learning_skill_process",
+      "target": "skill_learning_skill_7_edit_and_commit"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "vault/CLAUDE.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "vault_claude",
+      "target": "vault_claude_vault_instructions_for_claude_code"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "vault/CLAUDE.md",
+      "source_location": "L117",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "vault_claude_vault_instructions_for_claude_code",
+      "target": "vault_claude_graphify_memory_graphs_vs_code_map_notes_don_t_confuse_them"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "vault/CLAUDE.md",
+      "source_location": "L61",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "vault_claude_vault_instructions_for_claude_code",
+      "target": "vault_claude_project_stacks"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "vault/CLAUDE.md",
+      "source_location": "L91",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "vault_claude_vault_instructions_for_claude_code",
+      "target": "vault_claude_session_commands"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "vault/CLAUDE.md",
+      "source_location": "L100",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "vault_claude_vault_instructions_for_claude_code",
+      "target": "vault_claude_session_transcripts_chats_and_their_distillation_sessions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "vault/CLAUDE.md",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "vault_claude_vault_instructions_for_claude_code",
+      "target": "vault_claude_structure_what_is_isn_t_graphed"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "vault/CLAUDE.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "vault_claude_vault_instructions_for_claude_code",
+      "target": "vault_claude_what_is_this_vault"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "vault/CLAUDE.md",
+      "source_location": "L64",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "vault_claude_vault_instructions_for_claude_code",
+      "target": "vault_claude_zettelkasten_rules"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "vault/CLAUDE.md",
+      "source_location": "L85",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "vault_claude_zettelkasten_rules",
+      "target": "vault_claude_never_do"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "vault/CLAUDE.md",
+      "source_location": "L66",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "vault_claude_zettelkasten_rules",
+      "target": "vault_claude_note_creation"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "vault/CLAUDE.md",
+      "source_location": "L73",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "vault_claude_zettelkasten_rules",
+      "target": "vault_claude_standard_frontmatter"
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "9c384236fc7fb96e6b822efa5852d22c7070e62b"
+  "built_at_commit": "7b1d8ef237acbfe3b6c56d857f8666be9e8e3be3"
 }
