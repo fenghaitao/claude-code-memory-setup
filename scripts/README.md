@@ -16,8 +16,11 @@ separate export step. For each session it:
 
 - Merges continuation files by `session_id`, dedupes repeated/streamed
   records, and drops tool-output/local-command noise.
-- Resolves the target project the same way `/save-memory` does (basename of
-  the session's git toplevel, falling back to the session's cwd).
+- Resolves the target project the same way `/save-memory` does: basename of
+  the session's git toplevel. A session whose cwd isn't (or is no longer)
+  inside a git repo has no stable project identity, so it's skipped rather
+  than filed under a raw directory-name guess (e.g. a session run in `/tmp`
+  or `$HOME` directly).
 - Also captures Task-tool subagent runs (`<session>/subagents/*.jsonl`) as
   their own separate transcripts — tagged `subagent`, linked back via
   `parent_session_id`/`agent_id` — rather than merging them into the parent

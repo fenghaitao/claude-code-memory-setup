@@ -295,19 +295,22 @@ def _session_behavior(events):
 # ---------------------------------------------------------------------------
 
 def resolve_project(cwd):
-    """Match /save-memory's own resolution: basename of the git toplevel, or
-    basename of cwd if it isn't (or is no longer) a git repo."""
-    if cwd:
-        try:
-            out = subprocess.run(
-                ["git", "-C", cwd, "rev-parse", "--show-toplevel"],
-                capture_output=True, text=True, timeout=5,
-            )
-            if out.returncode == 0 and out.stdout.strip():
-                return Path(out.stdout.strip()).name
-        except (OSError, subprocess.SubprocessError):
-            pass
-    return Path(cwd.rstrip("/")).name if cwd else "unknown"
+    """Match /save-memory's own resolution: basename of the git toplevel.
+    Returns None if cwd isn't inside a git repo (or no longer exists) — a
+    session outside a repo has no stable project identity to file it under,
+    so it's skipped rather than filed under a raw directory-name guess."""
+    if not cwd:
+        return None
+    try:
+        out = subprocess.run(
+            ["git", "-C", cwd, "rev-parse", "--show-toplevel"],
+            capture_output=True, text=True, timeout=5,
+        )
+        if out.returncode == 0 and out.stdout.strip():
+            return Path(out.stdout.strip()).name
+    except (OSError, subprocess.SubprocessError):
+        pass
+    return None
 
 
 def slugify(text, max_words=6, max_len=50):
@@ -461,11 +464,19 @@ def main(argv=None):
     sessions = _collect_sessions(scan_dir, since, include_subagents=not args.no_subagents)
     if args.latest:
         mains = [s for s in sessions if not s["is_subagent"]]
-        sessions = [max(mains, key=lambda s: s["first_ts"])] if mains else []
+        latest = max(mains, key=lambda s: s["first_ts"]) if mains else None
+        if latest and resolve_project(latest["cwd"]) is None:
+            print(f"Latest session's cwd ({latest['cwd']}) isn't inside a git repo — "
+                  "skipping (a session needs a git-resolved project to file its chat under).")
+            return 0
+        sessions = [latest] if latest else []
 
-    written = skipped = 0
+    written = skipped = skipped_non_git = 0
     for s in sorted(sessions, key=lambda s: s["first_ts"]):
         project = resolve_project(s["cwd"])
+        if project is None:
+            skipped_non_git += 1
+            continue
         if args.project and args.project.lower() not in project.lower():
             continue
         date = s["first_ts"].strftime("%Y-%m-%d")
@@ -492,7 +503,8 @@ def main(argv=None):
         print(f"wrote {dest}")
         written += 1
 
-    print(f"\n{written} session(s) written, {skipped} already exported.")
+    print(f"\n{written} session(s) written, {skipped} already exported, "
+          f"{skipped_non_git} skipped (not in a git repo).")
     return 0
 
 
