@@ -61,9 +61,39 @@ still a rule wearing a global note's frontmatter — leave it project-scoped.
    `sessions/`, those are per-project raw/provenance, not candidates for
    generalization).
 
-2. **Dedup, two cheap/mechanical ways, before judging anything:**
+2. **Dedup, three layers, before judging anything.** graphify already ships a
+   deterministic, no-LLM entity-dedup pipeline (`graphify/dedup.py`:
+   normalization → entropy gate → MinHash/LSH blocking → Jaro-Winkler ≥ 92 →
+   same-community boost → union-find merge) that `graphify extract` runs
+   automatically (`dedup=True` by default in `build.py`) — reuse it instead of
+   a plain grep:
    - **Already ingested** — grep existing `memory/global/*.md` frontmatter
-     `sources:` lists for the candidate's path. If present, skip.
+     `sources:` lists for the candidate's path. If present, skip. (Cheap
+     provenance check; catches only the case where this exact source was
+     processed before.)
+   - **Lexical/structural near-duplicate** — after extracting `memory/global`
+     (`graphify extract ~/vault/memory/global --doc-only`), graphify's own
+     dedup pass has already run over that corpus. Two caveats to know before
+     trusting it:
+     - **Cross-repo dedup is refused outright** — `deduplicate_entities`
+       raises if nodes span more than one `repo` tag. This is fine here
+       because `memory/global` is extracted as its own single untagged
+       corpus (never through `merge-graphs`), never because a candidate is
+       compared while still attributed to its origin project.
+     - **Cross-file merging is blocked for `document`/`rationale` file_type**
+       nodes (heading/docstring-derived — parallel files share boilerplate
+       that would false-merge); only `concept`-typed nodes unify across
+       files. So this layer only actually catches a duplicate if the
+       candidate's note content extracts as a `concept` node, not a bare
+       heading — check the graph's `file_type` before trusting a "no merge
+       happened" result as "no duplicate."
+   - **Semantic near-duplicate** — the lexical pass catches near-identical
+     wording, not paraphrase (graphify's dedup is string-similarity based, no
+     embeddings). Run `graphify query "<candidate's core claim>" --graph
+     ~/vault/memory/global/graphify-out/graph.json` and read the top hits
+     yourself — this is the layer that catches "don't add a co-author
+     trailer" vs. "no Claude/Anthropic byline in commits" saying the same
+     thing in different words.
    - **Already resident** — grep `~/claude-code-memory-setup/global-CLAUDE.md`
      (the always-loaded config, not the retrieved vault tier) for the same
      principle. If it's already codified there, skip — don't duplicate a
