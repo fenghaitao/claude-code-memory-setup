@@ -46,10 +46,10 @@ else
 fi
 
 # ---------------------------------------------------------------------------
-# 2. ~/vault — memory-layer structure + templates
+# 2. ~/vault — memory-layer structure
 # ---------------------------------------------------------------------------
-mkdir -p "$VAULT/memory/global" "$VAULT/memory/projects" "$VAULT/templates"
-echo "[ok]       $VAULT/memory/{global,projects} and templates/ ensured"
+mkdir -p "$VAULT/memory/global" "$VAULT/memory/projects"
+echo "[ok]       $VAULT/memory/{global,projects} ensured"
 
 install_template() {  # src -> dest, only if dest missing
   local src="$1" dest="$2"

@@ -22,8 +22,6 @@ memory/
     └── graphify-out/          graph.json = MEMORY graph (notes only, input)
                                merged.json = MERGED query surface (repo ⊕ memory ⊕ bridges)
                                wiki/index.md = cached briefing      ✗ auto-excluded
-templates/                   Obsidian note scaffolding              ✗ not graphed
-graphify/                    code-graphs rendered as notes          ✗ not graphed
 ```
 
 Rule of thumb: **distilled judgment → `decisions/`+`notes/` (graphed); raw
@@ -114,7 +112,7 @@ this file defines *how* the vault is written, the skills decide *what* and
 - Legacy imports from the old pipeline may still sit in top-level `chats/`.
 - Graph View filters: `tag:chat-import` → chats only; `-path:chats` → hide chats.
 
-## Graphify (memory graphs vs code-map notes — don't confuse them)
+## Graphify (memory graph tiers)
 - **`memory/projects/<project>/graphify-out/`** — holds two artifacts: `graph.json`
   (the notes-only **memory graph**, an input) and `merged.json` (the **merged query
   surface**: repo code graph ⊕ memory graph ⊕ `link-doc` bridges — query with
@@ -124,6 +122,3 @@ this file defines *how* the vault is written, the skills decide *what* and
 - **`memory/graphify-out/`** — the **global tier**, code-free, *composed* from the
   memory graphs + `global/` on demand for cross-project queries. `global/` itself is
   written by `/ingest-principles`, not by hand.
-- **`graphify/`** (top-level) — code-graphs of *other repos* rendered as browsable
-  notes (`graphify/<project>/`). Auto-generated — do NOT edit manually. Not graphed.
-- Graph View: `path:graphify` → code-map nodes only; `-path:graphify` → hide them.

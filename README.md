@@ -134,8 +134,8 @@ It wires up:
 
 1. **`~/.claude/CLAUDE.md`** → imports this repo's `global-CLAUDE.md`
    (`@~/claude-code-memory-setup/global-CLAUDE.md`); appended only if absent.
-2. **`~/vault/`** → the `memory/{global,projects}` + `templates/` structure, plus
-   `CLAUDE.md` and `.graphifyignore` (installed only if missing).
+2. **`~/vault/`** → the `memory/{global,projects}` structure, plus `CLAUDE.md`
+   and `.graphifyignore` (installed only if missing).
 3. **`~/.claude/skills/`** → symlinks the repo's skills. Skills already linked to an
    external upstream (e.g. `obsidian-cli`) are left untouched.
 
@@ -161,8 +161,6 @@ structure or `.graphifyignore`.
         ├── graph.json                   memory graph (notes only, input)
         ├── merged.json                  MERGED query surface (repo ⊕ memory ⊕ bridges)
         └── wiki/index.md                cached briefing
-~/vault/templates/                       Obsidian scaffolding               ✗ not graphed
-~/vault/graphify/                        code-graphs rendered as notes      ✗ not graphed
 ```
 
 ---

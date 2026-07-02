@@ -5,7 +5,5 @@
 
 **/chats/          # raw session transcripts written by /save-memory
 **/doc/            # link-docs preview folders (repo-bound, not graph corpus)
-templates/         # Obsidian note scaffolding
-graphify/          # code-graphs rendered as browsable notes (redundant w/ repo graph)
 graphify-out/      # the memory graph itself
 .graphify/         # graphify's extraction cache
