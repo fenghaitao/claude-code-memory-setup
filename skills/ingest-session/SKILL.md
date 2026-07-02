@@ -153,9 +153,13 @@ link to the project's most relevant existing note for context.
 
 ### Step 6: Sync
 
-Same as `/save-memory` step 6, doc-only (notes changed, not code):
+Same as `/save-memory` step 6, doc-only (notes changed, not code). Always
+`extract --doc-only`, never `graphify update` — `update` is unconditionally
+AST-only and exits 0 even on a notes dir, silently downgrading the semantic
+memory graph to a structural one with no error to catch (see
+`notes/update-vs-extract-doc-only.md` in the vault):
 ```bash
-graphify update "$proj_dir" 2>/dev/null || graphify extract "$proj_dir" --doc-only 2>/dev/null || true
+graphify extract "$proj_dir" --doc-only 2>/dev/null || true
 graphify link-docs "$proj_dir" --code-graph "$repo_graph" --doc-graph "$mem_graph" \
     --match-code --link-code --out "$merged" 2>/dev/null || true
 graphify export wiki --graph "$merged" 2>/dev/null || graphify export wiki --graph "$mem_graph" 2>/dev/null || true

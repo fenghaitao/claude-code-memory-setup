@@ -49,8 +49,11 @@ inputs and one composed output:
   (reach for it directly only as a bleeding-edge escape hatch mid-edit).
 - **Memory graph** — `~/vault/memory/projects/<project>/graphify-out/graph.json`.
   This project's distilled notes only (`decisions/`, `notes/`; `chats/` excluded),
-  extracted by `graphify update <proj_dir>`. Small and cheap to re-extract when notes
-  change. An **intermediate**: it feeds the merged graph and the global tier.
+  extracted by `graphify extract <proj_dir> --doc-only` — **never** `graphify
+  update`, which is unconditionally AST-only and silently downgrades a semantic
+  doc graph to a structural one with no error to catch. Small and cheap to
+  re-extract when notes change (semantic cache keyed on doc content). An
+  **intermediate**: it feeds the merged graph and the global tier.
 - **Per-project merged graph** —
   `~/vault/memory/projects/<project>/graphify-out/merged.json` =
   **repo graph ⊕ memory graph ⊕ the bridge edges `link-doc` draws between them.**
@@ -152,8 +155,9 @@ on its own:
   graph, then re-compose — re-base the merged graph's **code layer** from it, keeping
   the memory nodes and cached bridges. New code that *should* bridge waits for the
   next re-link; acceptable.
-- **Memory changed** (`/save-memory`): `graphify update <proj_dir>` re-extracts the
-  small **memory graph**, then re-link — reuse cached bridges for unchanged notes,
+- **Memory changed** (`/save-memory` → `/ingest-session`): `graphify extract
+  <proj_dir> --doc-only` re-extracts the small **memory graph** (never `update`
+  — see the "Do NOT" list), then re-link — reuse cached bridges for unchanged notes,
   LLM-match only new/changed (note, code) pairs.
 - **Staleness guard** (so "query only the merged graph" stays honest): the merged graph
   records the hashes of the two input graphs it was composed from; before querying, if
@@ -211,7 +215,8 @@ memory→code only, so a pointer would sit unbridged in the graph. Grounding inp
 
 ### When to rebuild
 - Repo graph: `graphify update .` (per-commit, cheap).
-- Memory graph: `graphify update <proj_dir>` on `/save-memory` (small, cheap).
+- Memory graph: `graphify extract <proj_dir> --doc-only` via `/ingest-session`
+  (small, cheap; semantic cache keyed on doc content).
 - Merged graph: re-compose whenever either input changed — at `/save-memory` (re-link)
   and via the staleness guard (code re-base).
 - Global tier: `merge-graphs` over the memory graphs + `global/`, on demand only.
@@ -224,3 +229,6 @@ memory→code only, so a pointer would sit unbridged in the graph. Grounding inp
 - Don't re-run full `link-doc` on every commit — code-sync is the cheap re-base.
 - Don't re-read a corpus the relevant graph already summarizes; don't auto-inject any
   index.
+- Don't use `graphify update` on a memory/notes directory — it's unconditionally
+  AST-only, exits 0 even there, and silently downgrades a semantic doc graph to
+  a structural one. `update` is for the repo (code) graph only.
