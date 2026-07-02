@@ -1,53 +1,74 @@
 ---
 name: load-memory
-description: Reload project context from the ~/vault memory layer at the start of a session — query the memory graph for the project's map, then read recent decisions/notes (dropping to raw transcripts only when needed) — so work continues with memory of prior sessions. Use when the user types /load-memory, asks to resume, pick up where we left off, or restore context for the current project.
+description: Reload project context from the ~/vault memory layer at the start of a session — read the precomputed briefing (per-project index.md + recent decisions/notes), syncing the graph first if code moved, and drop to a live graphify query only for scoped or ad-hoc questions — so work continues with memory of prior sessions. Use when the user types /load-memory, asks to resume, pick up where we left off, or restore context for the current project.
 ---
 
-# /load-memory — reload project memory from the vault (Layer 2)
+# /load-memory — reload project memory from the vault
 
-Pull the *judgment* captured by previous sessions back into context before
-working. Counterpart to `/save-memory`. Run from **any project directory** — this
-skill resolves the vault path itself.
+Pull the *judgment* captured by previous sessions back into context before working.
+Counterpart to `/save-memory`. Run from **any project directory** — this skill
+resolves the vault path itself.
 
-The project's home in the vault is `~/vault/memory/projects/<project>/`.
+The project's home in the vault is `~/vault/memory/projects/<project>/`. Its query
+surface is the **merged graph** there (repo code ⊕ this project's notes ⊕ `link-doc`
+bridges). The default load path **reads the cached briefing** — a live graphify query
+is only for variable questions.
 
 ## Steps
 
-1. **Resolve the project name and path:**
+1. **Resolve the project name and paths:**
    ```bash
    project="$(basename "$(git rev-parse --show-toplevel 2>/dev/null || pwd)")"
    proj_dir=~/vault/memory/projects/"$project"
+   merged="$proj_dir"/graphify-out/merged.json   # repo ⊕ memory ⊕ bridges
+   # ($proj_dir/graphify-out/graph.json is the notes-only memory graph, an input)
    ```
+   If `$proj_dir` doesn't exist, say so — a fresh project for the vault, nothing to
+   resume.
 
-2. **Map the project from *its own* graph — the graph is the index** (there is no
-   hand-written INDEX). Query the project graph, selecting it explicitly with
-   `--graph` (do NOT rely on cwd — that would hit the *repo's* graphify-out, the
-   wrong graph):
+2. **Sync if stale, then read the cached briefing — don't re-query.** The standard
+   "state of this project" answer is precomputed into `index.md` at `/save-memory`;
+   `index.md` is a *cache* of that fixed query, so **Read** it rather than re-running
+   the query. First keep the merged graph honest about current code (staleness guard):
+   if the repo graph is newer than the merged graph, re-sync the code layer.
    ```bash
-   pg="$proj_dir"/graphify-out/graph.json
-   graphify query "overview of $project decisions and notes" --graph "$pg"
-   graphify explain "<key concept>" --graph "$pg"     # zoom in on one node
+   graphify update . 2>/dev/null || true    # refresh repo graph (source)
+   # then re-base the merged graph's code layer / re-bridge — see the sync process in
+   # the global config. (Until incremental link-doc lands, /save-memory already
+   # rebuilt the merged graph; a full re-bridge is only needed if code moved a lot.)
    ```
-   Browsable fallback: `$proj_dir/graphify-out/wiki/index.md`. Use this to decide
-   which notes to open. **Cross-project** ("which project touched X"?) → query the
-   vault roll-up instead: `--graph ~/vault/memory/graphify-out/graph.json`, then
-   descend into the specific project's graph. Query the narrowest graph that can
-   answer — the small project graph is faster and more precise than the roll-up.
+   Then read the briefing:
+   - `$proj_dir/graphify-out/wiki/index.md` — the per-project map: code + decisions,
+     with the bridges between them.
 
-3. **Read the recent decision/permanent notes** the graph surfaces, under
-   `$proj_dir/decisions/` and `$proj_dir/notes/` — focus on *why* and known
-   pitfalls. Follow `supersedes` links to see what's in force vs replaced; prefer
-   the newest decisions to reconstruct what's pending.
+3. **Read the recent decision/permanent notes for *status*.** The map is topology;
+   "where we left off / what's pending" lives in the note bodies + frontmatter
+   (`status:`). Read the newest under `$proj_dir/decisions/` and `$proj_dir/notes/`;
+   follow `supersedes` links to see what's in force vs replaced.
 
-4. **Only if you need verbatim detail** — an exact exchange or a decision the
-   notes summarize too tersely — drop to the raw transcript in `$proj_dir/chats/`
-   (newest first). These are ground truth but verbose; the notes are the fast path.
+4. **Backdrop: the global tier.** For cross-cutting conventions or prior art from other
+   projects, read `~/vault/memory/graphify-out/wiki/index.md` (or query
+   `--graph ~/vault/memory/graphify-out/graph.json`). Ambient — lower priority than the
+   project's own briefing.
 
-5. **Summarize current state** for the user: where things stand, the key
-   decisions in force, and the pending items / what's left to do next.
+5. **Only for a *variable* question — query live.** A scoped resume
+   (`/load-memory <topic>`) or an ad-hoc "why is this code like this" isn't in the
+   cached briefing → query the merged graph directly:
+   ```bash
+   graphify query "<topic>" --graph "$merged"
+   graphify path "<code node>" "<decision>" --graph "$merged"   # why this code is so
+   ```
+   Drop to raw only when you need verbatim detail: the note files (Obsidian CLI) or the
+   transcript in `$proj_dir/chats/` (newest first).
+
+6. **Summarize current state** for the user: where things stand, the key decisions in
+   force, and the pending items / what's left to do next.
 
 ## Notes
-- If `$proj_dir` doesn't exist yet, say so — this is a fresh project for the
-  vault; nothing to resume.
-- For *code structure* questions use `graphify query` (the graph), not the vault —
-  the vault is for the *why*, status, and plans graphify can't hold.
+- Default path is **read the cache** (`index.md` + recent notes), not a live query —
+  the fixed load-question is precomputed. Live `graphify query` is for scoped/ad-hoc
+  questions only.
+- The merged graph is machine-local (it contains vault nodes); the repo graph stays the
+  portable source. Query the merged graph — it's the one carrying the bridges.
+- For pure *code structure* questions you can still hit the repo graph directly (the
+  fresh source); the merged graph is the default because it also holds the why.

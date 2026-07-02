@@ -1,49 +1,86 @@
 # Claude Code Memory Setup
 
-Give Claude Code two persistent knowledge layers so it stops re-reading your code
-and stops forgetting your decisions:
+Give Claude Code a persistent memory so it stops re-reading your code and stops
+forgetting your decisions:
 
-- a **repo graph** (graphify) — the *structure* of your code, queried instead of re-read;
-- a **memory layer** (an Obsidian vault under `~/vault/memory/`) — the *judgment*
-  a codebase never stores: decisions, why-X-over-Y, status, cross-session history.
+- a **repo graph** (graphify) — the *structure* of your code + docs, queried instead
+  of re-read;
+- a **memory layer** (an Obsidian vault under `~/vault/memory/`) — the *judgment* a
+  codebase never stores: decisions, why-X-over-Y, status, cross-session history;
+- a **merged knowledge graph** per project that `link-doc` builds from the two — so
+  "why is this code the way it is" is an actual queryable path from a code node to a
+  decision note.
 
 The whole system is driven by one global config (`global-CLAUDE.md`), two skills
 (`/save-memory`, `/load-memory`), and a one-shot installer (`scripts/setup.sh`).
 
 ---
 
-## The model: representation × domain (a 2×2, not a stack)
+## The pipeline
 
-Knowledge lives on two orthogonal axes. **Domain** = *what* you're asking about
-(code vs memory). **Representation** = *how* you read it (a queried graph vs raw
-ground truth).
+```
+REPO (per project)                              VAULT (~/vault/memory/)
+──────────────────                              ───────────────────────
+code ──┐                                        projects/<p>/{decisions,notes}
+       ├─ graphify ─► repo graph.json                      │ graphify
+docs ──┘  (code ⊕ docs, bridged by link-doc;               ▼
+           committed, PORTABLE source)          memory graph.json  (notes only)
+                      │                                    │
+                      └────────── link-doc ────────────────┤
+                                     │                     │ merge-graphs (+ global/)
+                                     ▼                     ▼
+                    per-project MERGED merged.json     GLOBAL tier graph.json
+                    = repo ⊕ memory ⊕ bridges          (code-free, cross-project,
+                    machine-local; queried ON DEMAND    rebuilt on demand)
+                                     │
+                        export wiki (pre-defined queries)
+                                     ▼
+                    briefings (index.md, …) — READ at /load-memory
+```
 
-|            | **Repo domain** (code + docs)        | **Memory domain** (`~/vault/memory/`)        |
-| ---------- | ------------------------------------ | -------------------------------------------- |
-| **L1 — graph** | `graphify query` (repo `graph.json`) | `graphify query` (vault `graph.json`)    |
-| **L2 — raw**   | read the code/doc files          | Obsidian CLI (`obsidian-query.sh`)           |
+Per project, **three graph artifacts** — two extracted inputs, one composed output:
 
-**L1 = graphify everywhere; L2 = the native reader for that domain.** Both domains
-are graphify graphs sharing one query language over separate corpora.
+| Artifact | Where | What | Role |
+|---|---|---|---|
+| **Repo graph** | `<repo>/graphify-out/graph.json` | code ⊕ committed docs | the **portable source** — reproducible from the repo alone; survives clone / CI / teammates; refreshed per-commit (`graphify update .`, AST-cheap) |
+| **Memory graph** | `…/projects/<p>/graphify-out/graph.json` | this project's distilled notes | small **intermediate**, re-extracted cheaply at `/save-memory`; feeds the merged graph and the global tier |
+| **Merged graph** | `…/projects/<p>/graphify-out/merged.json` | repo ⊕ memory ⊕ `link-doc` bridges | the **single query surface** — the only graph linking code, docs, *and* the why/status. Contains vault nodes → machine-local, never committed |
 
-### How to route a question
+Plus one **global tier** (`~/vault/memory/graphify-out/graph.json`): code-free *by
+construction* — composed (`merge-graphs`) from the per-project memory graphs +
+`global/`. For cross-project prior-art only.
 
-1. **Pick the domain by what's asked** — not by "did the last layer come up empty":
-   - *what / how / where* (structure, calls, deps) → **repo**.
-   - *why / which-did-we-pick / status / what's-left / the plan* → **memory**. The
-     repo graph *cannot* answer these — the rationale was never in the code. A
-     confident repo answer to a *why* is a **false hit: wrong domain, not wrong layer**.
-   - genuinely cross-domain → query both, **compose by facet** (structure ← repo,
-     why ← memory); never score-rerank across domains.
-2. **Within a domain, query L1 (graph) first, drop to L2 (raw) on demand** — when
-   you need line-exact truth (editing, exact logic, verifying a stale claim).
+### How a question is answered
 
-Each domain's L1 graph is a **cache** of that domain's L2 raw; `graphify update`
-is the invalidation. Durable rationale can **graduate** memory → repo L1 via
-`graphify link-docs` (see below).
+1. **Single-project question** → query the **merged graph**; bias the facet with
+   `--context code|doc`. A *code* node answers what/how/where; a *rationale/doc* node
+   answers why/status. **A code node is never a valid answer to a why** — if a
+   why-question surfaces only code, the rationale isn't captured yet.
+   `graphify path "<code node>" "<decision>"` = *why this code is the way it is*.
+2. **Cross-project question** → query the **global tier**.
+3. **Descend to raw on a checkable signal**, not a hunch:
+   - **Resolution** — you're editing, or the graph answer lacks the exact
+     value/line/signature the question demands → `Read` the `src`/`loc` graphify named.
+   - **Freshness** — the input graphs are newer than the merged graph, or a note/file
+     changed since the last sync → raw is live; for notes use the Obsidian CLI (its
+     index is always current).
+   - **Coverage** — the target was never ingested (`chats/` transcripts are excluded
+     by design) → Obsidian CLI / direct read is the only way in.
 
-Memory is never auto-injected — you *query* it. The always-resident nudge is a one
-line "pointer" in the global config; `/load-memory` is the explicit reload.
+### Two caches, two invalidations
+
+- The **merged graph** is a pure composition of (repo graph ⊕ memory graph);
+  invalidation = the sync process. Code changed → cheap re-base of the code layer, no
+  LLM. Notes changed → re-extract the small memory graph, re-link (cached bridges,
+  delta-only matching).
+- The **briefings** (`wiki/index.md`, …) are cached answers to *pre-defined* queries
+  ("state of this project", decisions in force, pending); re-exported at
+  `/save-memory`, **read** at `/load-memory`. Live `graphify query` is for *variable*
+  questions only.
+
+Memory is never auto-injected — a one-line resident pointer in the global config plus
+`/load-memory` covers the "did I remember to look?" gap. Injection is
+stale-and-always-paid; reading the briefing on demand is fresh-and-cheap.
 
 ---
 
@@ -53,7 +90,7 @@ line "pointer" in the global config; `/load-memory` is the explicit reload.
 global-CLAUDE.md         # the whole model above, imported into ~/.claude/CLAUDE.md
 scripts/
 ├── setup.sh             # idempotent installer (wires everything up)
-├── obsidian-query.sh    # wrapper for the Obsidian CLI (L2 raw reader for memory)
+├── obsidian-query.sh    # wrapper for the Obsidian CLI (raw reader for memory)
 ├── claude_to_obsidian.py    # render/import a session transcript into the vault
 └── sync_claude_obsidian.sh  # optional bulk chat-import automation
 skills/
@@ -62,7 +99,7 @@ skills/
 └── obsidian-cli/        # vendored Obsidian CLI skill (fresh-machine fallback)
 vault/
 ├── CLAUDE.md            # template: rules + structure for ~/vault
-└── .graphifyignore      # template: keeps raw/tooling out of the memory graph
+└── .graphifyignore      # template: keeps raw/tooling out of the memory graphs
 ```
 
 ---
@@ -90,8 +127,8 @@ It wires up:
    (`@~/claude-code-memory-setup/global-CLAUDE.md`); appended only if absent.
 2. **`~/vault/`** → the `memory/{global,projects}` + `templates/` structure, plus
    `CLAUDE.md` and `.graphifyignore` (installed only if missing).
-3. **`~/.claude/skills/`** → symlinks the repo's skills. Skills already linked to
-   an external upstream (e.g. `obsidian-cli`) are left untouched.
+3. **`~/.claude/skills/`** → symlinks the repo's skills. Skills already linked to an
+   external upstream (e.g. `obsidian-cli`) are left untouched.
 
 Start a new Claude Code session afterward to load the config.
 
@@ -100,30 +137,23 @@ Start a new Claude Code session afterward to load the config.
 ## The memory layer
 
 Only **distilled** notes are graphed; raw narrative and tooling are excluded by
-structure (living outside the scan root) or by `.graphifyignore`.
+structure or `.graphifyignore`.
 
 ```
-~/vault/memory/                          ← scan root
-├── graphify-out/                        VAULT roll-up graph + wiki/index.md
+~/vault/memory/
+├── graphify-out/                        GLOBAL tier (composed, code-free)
 ├── global/                              cross-project durable notes        ✓ graphed
 └── projects/<project>/
-    ├── decisions/                       ADRs, why-X-over-Y                 ✓ graphed
-    ├── notes/                           permanent / concept notes         ✓ graphed
-    ├── chats/                           raw session transcripts           ✗ excluded
-    └── graphify-out/                    PROJECT graph + wiki/index.md
-~/vault/templates/                       Obsidian scaffolding              ✗ not graphed
-~/vault/graphify/                        code-graphs rendered as notes     ✗ not graphed
+    ├── decisions/                       ADRs, why-X-over-Y                 ✓ graphed → bridged to code
+    ├── notes/                           permanent / concept notes          ✓ graphed → bridged to code
+    ├── chats/                           raw session transcripts            ✗ excluded
+    └── graphify-out/
+        ├── graph.json                   memory graph (notes only, input)
+        ├── merged.json                  MERGED query surface (repo ⊕ memory ⊕ bridges)
+        └── wiki/index.md                cached briefing
+~/vault/templates/                       Obsidian scaffolding               ✗ not graphed
+~/vault/graphify/                        code-graphs rendered as notes      ✗ not graphed
 ```
-
-**Two-tier graphs** — every scanned dir owns its `graphify-out/` (nested ones are
-auto-excluded); the index is always `<dir>/graphify-out/wiki/index.md`:
-
-- **Per-project graph** (`projects/<project>/graphify-out/`) — refreshed every
-  `/save-memory`; the working index `/load-memory` queries.
-- **Vault roll-up** (`memory/graphify-out/`) — *composed* from the project graphs
-  (`graphify merge-graphs …`), rebuilt on demand for cross-project navigation.
-
-The map/index is **generated by graphify** (`export wiki`), never hand-written.
 
 ---
 
@@ -134,36 +164,43 @@ The map/index is **generated by graphify** (`export wiki`), never hand-written.
 Run at the end of a session (context still warm). It:
 - writes distilled **decisions/notes** into `~/vault/memory/projects/<project>/`
   (graphed), linking related notes and marking replaced ones with `supersedes`;
-- dumps the **raw transcript** into that project's `chats/` (excluded from the graph);
-- refreshes the **project graph** (`graphify update` + `export wiki`);
-- flags any *durable, repo-specific* decision as a candidate to graduate to repo L1.
+- dumps the **raw transcript** into that project's `chats/` (excluded from the graphs);
+- **syncs the pipeline**: refreshes the repo + memory graphs, re-links them into
+  `merged.json`, and re-exports the briefings;
+- flags any *durable, repo-specific* decision as a candidate to graduate into a repo
+  doc (see promotion below).
 
 ### `/load-memory` — reload a project's memory
 
-Run at the start of a session. It queries the project's own graph (via `--graph`,
-so it can't accidentally hit the repo's graph), reads the recent decisions/notes,
-follows `supersedes` to see what's in force, and summarizes current state. Cross-
-project questions escalate to the vault roll-up.
+Run at the start of a session. Default path is **read the cache, don't re-query**:
+sync if the inputs moved, then read the per-project briefing (`wiki/index.md`), the
+recent decision/notes for *status*, and the global briefing as backdrop. Live
+`graphify query` fires only for *variable* questions — a scoped resume
+(`/load-memory <topic>`) or an ad-hoc why.
 
 ### Querying by hand
 
 ```bash
-# L1 — structure / connections (repo or memory graph, chosen with --graph)
-graphify query "…" --graph ~/vault/memory/projects/<project>/graphify-out/graph.json
-graphify explain "<node>"      # one node
-graphify path "<A>" "<B>"      # shortest path
+merged=~/vault/memory/projects/<project>/graphify-out/merged.json
 
-# L2 — raw memory notes (needs Obsidian running)
+graphify query "…" --graph "$merged"              # structure + why, one graph
+graphify query "…" --graph "$merged" --context doc   # bias to the memory facet
+graphify path "<code node>" "<decision>" --graph "$merged"   # why this code is so
+graphify explain "<node>" --graph "$merged"
+
+# raw memory notes — lexical search, backlinks, chats/ (needs Obsidian running)
 ./scripts/obsidian-query.sh vault="vault" search:context query="<term>"
 ./scripts/obsidian-query.sh vault="vault" read file="<note>"
 ```
 
-### Promoting memory → repo (`graphify link-docs`)
+### Promoting memory → the portable repo graph
 
-When a decision is durable *and* repo-specific, move it into a repo doc and run
-`graphify link-docs` — it ingests the doc and bridges it to the exact code it
-explains (`describes` / `specifies` / `motivates`), so the *why* becomes queryable
-in the repo graph and survives clone/CI/teammates. Fluid, personal, or
+The merged graph bridges your vault notes to code **locally** (vault nodes,
+machine-local). When a rationale is durable *and* repo-specific — an ADR a teammate
+cloning the repo would want — **graduate** it: move it into a repo doc, commit it, and
+`graphify link-docs` ingests it into the **repo graph**, bridged to the code it
+explains. Now it survives clone / CI / teammates. De-dupe on promotion: delete the
+vault note or leave a one-line pointer, never a divergent copy. Fluid, personal, or
 cross-project notes stay in the vault.
 
 ---
@@ -172,15 +209,28 @@ cross-project notes stay in the vault.
 
 The full rationale lives in [`global-CLAUDE.md`](./global-CLAUDE.md); highlights:
 
-- **Route by question type, not by fallback** — a graph almost never returns
-  nothing, so "fall through only when empty" means the right source is never reached.
-- **Wrong domain ≠ wrong layer** — the sharpest failure mode is a confident repo
-  answer to a *why* question; the fix is querying the memory domain, not reading raw.
-- **Query-first, no auto-injection** — injecting the memory index every session is
-  stale-and-always-paid; querying is fresh-and-cheap. A resident one-line pointer
-  plus `/load-memory` covers the "did I remember to look?" gap.
-- **Scope-first search** — hit the narrowest graph that can answer (the small
-  project graph before the vault roll-up).
+- **One query surface per project** — the merged graph links code, docs, and memory,
+  so within a project you pick a *facet* (`--context code|doc`), not a graph. The
+  sharpest failure mode — a confident code answer to a *why* question — is killed by
+  type: a code node is never a valid why-answer.
+- **Source vs derivation** — the repo graph stays reproducible from the repo alone
+  (portable); the merged graph is a machine-local derivation. Vault nodes never enter
+  the committed repo graph.
+- **Query-first, no auto-injection** — briefings are read on demand at `/load-memory`,
+  at the same freshness a live query would give (both reflect the last sync).
+- **Descend on checkable signals** — resolution / freshness / coverage, each with an
+  observable trigger; two of them (editing, transcripts) are known *before* querying.
+
+### Graphify follow-ups this design assumes
+
+Tracked as TODOs; a full re-link per `/save-memory` is the interim fallback:
+
+1. **Two-graph `link-doc`** — take the repo graph + the memory graph, emit bridge
+   edges + the composed `merged.json` (`--docs-graph`, `--out`), with a bridge cache
+   so re-links are edges-only deltas.
+2. **Staleness stamp** — record input-graph hashes in `merged.json` so the "is the
+   merged graph stale?" check is mechanical (and a `--verify` flag to mark nodes whose
+   `src` changed since extraction).
 
 ---
 
