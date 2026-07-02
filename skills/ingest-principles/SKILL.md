@@ -49,6 +49,11 @@ Does **not** qualify: a decision whose reasoning depends on that project's
 specific code, stack, or constraints (most `decisions/` entries) — those stay
 project-scoped even if well-written.
 
+**Mechanical check:** can you name 3+ concrete situations, in different
+projects, where this would change what an agent does? If yes, it's a
+principle. If you can only picture the one situation the note came from, it's
+still a rule wearing a global note's frontmatter — leave it project-scoped.
+
 ## Steps
 
 1. **Collect candidates.** Read `decisions/*.md` and `notes/*.md` under every
@@ -56,7 +61,7 @@ project-scoped even if well-written.
    `sessions/`, those are per-project raw/provenance, not candidates for
    generalization).
 
-2. **Dedup, two ways, before judging anything:**
+2. **Dedup, two cheap/mechanical ways, before judging anything:**
    - **Already ingested** — grep existing `memory/global/*.md` frontmatter
      `sources:` lists for the candidate's path. If present, skip.
    - **Already resident** — grep `~/claude-code-memory-setup/global-CLAUDE.md`
@@ -65,22 +70,43 @@ project-scoped even if well-written.
      resident rule into the retrieved tier; that's exactly the redundancy the
      memory-tier split exists to avoid.
 
-3. **Judge each remaining candidate** against the generality test above. Most
-   will fail it — that's expected and correct, not a sign something's wrong.
+3. **Ask why, for each remaining candidate.** A `decisions:`/`notes:` entry
+   usually narrates a specific incident — that's a symptom, not yet a
+   principle. Find the underlying cause before judging portability:
+   `graphify update silently corrupted the memory graph` (symptom, one
+   project's incident) → why? → `update is unconditionally AST-only and
+   doesn't remember doc-only mode` (mechanism — this is the candidate to test
+   for generality, not the incident narrative it came from).
 
-4. **Write or merge the global note**, per `~/vault/CLAUDE.md`'s Zettelkasten
-   rules (frontmatter, kebab-case, ≥2 wikilinks, one concept per note), plus
-   `sources:` listing every project note that evidences it:
-   - **New principle** → create `memory/global/<slug>.md`. Word it generally —
-     strip project-specific naming from the statement itself; project detail
-     stays reachable via the `sources:` citations, not restated here.
-   - **Existing principle, new evidence** → add the new source to `sources:`;
-     only touch the body if the new instance reveals a real nuance the
-     existing wording misses (don't rewrite for its own sake).
-   - **Contradicts an existing global note** → don't silently overwrite (vault
-     rule). Report both, with their source projects, and ask.
+4. **Judge the underlying cause** — not the incident — against the generality
+   test above, including the 3+ situations check. Most will fail; that's
+   expected, not a sign something's wrong.
 
-5. **Sync**, doc-only, global scope — no repo graph involved:
+5. **Check it against existing global notes**, not just the mechanical dedup
+   in step 2 — read the ones on a related topic, since editing or removing one
+   is exactly as valid as adding, and a wrong global note does more damage
+   than a missing one:
+   - **Already covered, nothing new** → skip.
+   - **Already covered, new evidence sharpens or nuances it** → update that
+     note's wording in place (don't just append) and add the new source.
+   - **An existing note is now known to be imprecise or stale** → rewrite or
+     delete it, note why in the report (step 8) — don't leave it standing out
+     of inertia.
+   - **Contradicts an existing note and it's not clear which is right** →
+     don't silently overwrite (vault rule). Report both, with their source
+     projects, and ask.
+   - **Genuinely new** → create `memory/global/<slug>.md` per
+     `~/vault/CLAUDE.md`'s Zettelkasten rules (frontmatter, kebab-case, ≥2
+     wikilinks, one concept per note), `sources:` listing every project note
+     that evidences it. Word the *mechanism* from step 3, not the incident —
+     project detail stays reachable via `sources:`, not restated here.
+
+6. **Anti-bloat pass, only if `memory/global/` has grown since the last run:**
+   skim titles for overlap and merge notes that are really the same principle
+   restated. `global/` earns its place by staying small and high-signal — that
+   is the entire reason it isn't just `merge-graphs`'s mechanical union.
+
+7. **Sync**, doc-only, global scope — no repo graph involved:
    ```bash
    graphify extract ~/vault/memory/global --doc-only 2>/dev/null || true
    # then recompose the global tier itself, once you have >=2 project memory
@@ -94,15 +120,32 @@ project-scoped even if well-written.
    Never `graphify update` here either — same AST-only trap as the per-project
    memory graph (`notes/update-vs-extract-doc-only.md`).
 
-6. **Report**: which project notes were judged general (and the global note
-   each produced/extended), and how many were judged project-specific and left
-   alone — the reader should be able to sanity-check the judgment calls, not
-   just trust a silent pass.
+8. **Report**: which project notes were judged general (with the underlying
+   cause extracted and the global note created/sharpened/merged), which global
+   notes were rewritten or deleted and why, and how many candidates were
+   judged project-specific and left alone — the reader should be able to
+   sanity-check every judgment call, not just trust a silent pass.
+
+## Anti-patterns
+
+- **A global note per gotcha.** The corpus should have few, sharp principles,
+  not an ever-growing list of "don't"s — that's what `merge-graphs` is for.
+- **Codifying a stylistic preference as a principle.** If the note describes a
+  choice that could reasonably have gone either way, it's not portable
+  knowledge — leave it project-scoped even if it reads cleanly.
+- **Restating the incident instead of the mechanism.** "Session X hit bug Y"
+  is not a principle; "Y happens because Z" is. If step 3 didn't produce a
+  mechanism, there's nothing to generalize yet.
+- **Leaving a stale global note standing.** If new evidence shows one is
+  wrong or imprecise, fix or delete it in the same pass — don't just add a
+  second, contradicting note next to it.
 
 ## Hard rules
 
 - Never delete or edit a project's `decisions/`/`notes/` file from here — this
-  skill only reads them and writes into `memory/global/`.
+  skill only reads them; it writes and revises `memory/global/` only.
 - Never duplicate a rule that's already resident in `global-CLAUDE.md`.
-- Never silently overwrite an existing global note on conflicting evidence —
-  report and ask (vault rule: don't delete/overwrite without asking).
+- Never silently overwrite an existing global note when the evidence
+  genuinely conflicts — report and ask (vault rule: don't delete/overwrite
+  without asking). Rewriting or deleting a note because it's confirmed stale
+  or imprecise is expected, not covered by this rule — just report it.
