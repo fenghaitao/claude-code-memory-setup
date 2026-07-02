@@ -104,6 +104,7 @@ skills/
 ├── ingest-session/      # /ingest-session — distill a transcript into decisions/notes
 ├── ingest-principles/   # /ingest-principles — generalize project notes into memory/global/
 ├── load-memory/         # /load-memory — reload a project's memory
+├── skill-learning/      # /skill-learning — turn friction with these skills into sharper judgment prose
 └── obsidian-cli/        # vendored Obsidian CLI skill (fresh-machine fallback)
 vault/
 ├── CLAUDE.md            # template: rules + structure for ~/vault
@@ -196,6 +197,18 @@ promotion this never deletes the source: many projects can independently land on
 the same rule. Skips anything already cited by an existing global note, or already
 codified in `global-CLAUDE.md` itself (don't duplicate resident config into the
 retrieved tier).
+
+### `/skill-learning` — turn friction with these skills into sharper judgment
+
+Same shape as `/ingest-principles`, aimed at a different corpus: not project
+notes → `memory/global/`, but friction with *these skills' own instructions* →
+edits to `skills/*/SKILL.md` themselves. Run when a judgment call embedded in
+one of these skills (dedup, promotion, decision-vs-note, generality) went
+wrong, or the same workaround got typed twice across sessions — identify the
+specific instance, ask why, check whether it generalizes, then sharpen (or
+edit, or delete) the judgment prose that governs the call. Never touches the
+mechanical/numbered steps — those are pipeline commands, and friction there
+is a tool bug, not a missing principle.
 
 ### `/load-memory` — reload a project's memory
 
