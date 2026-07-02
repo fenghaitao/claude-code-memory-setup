@@ -63,7 +63,14 @@ inputs and one composed output:
 - **Global tier** — `~/vault/memory/graphify-out/graph.json`. **Code-free by
   construction**: *composed* (`merge-graphs`) from every project's memory graph plus
   a graph over `global/` — no scanning, no code nodes possible. For cross-project
-  prior-art and navigation only; rebuilt on demand.
+  prior-art and navigation only; rebuilt on demand. `merge-graphs` is a mechanical,
+  no-LLM union (breadth, not synthesis — two projects' independent instances of the
+  same rule stay two disconnected nodes). `global/` is the curated half: written by
+  `/ingest-principles` (on demand, not per save), which reads every project's
+  `decisions/`+`notes/`, judges which generalize across projects (not just where
+  discovered), and writes one note per principle **citing** every project that
+  evidences it — not a move like repo-doc promotion, since multiple projects can
+  independently instantiate the same principle.
 
 "Memory" here is the *retrieved* long-term store (query-on-cue), distinct from
 Claude's *resident* memory (`MEMORY.md` / `CLAUDE.md`, auto-loaded every session).
@@ -206,12 +213,28 @@ surviving clone / CI / teammates. So `link-doc` serves two roles:
 - **graduate to durable L1** — repo doc → repo graph; for rationale that should outlive
   your machine.
 
-Keep in the vault: fluid/undecided, personal, or cross-project notes. **De-dupe on
-promotion: delete the vault note** (promotion is a move-as-PR, not a link — the doc
-re-enters the merged graph via the repo input on the next recompose, so nothing is
-lost). Never keep a divergent copy; don't leave pointer notes either — bridges are
-memory→code only, so a pointer would sit unbridged in the graph. Grounding input for
+Keep in the vault: fluid/undecided, personal, or cross-project notes (a
+cross-project note doesn't belong in one repo's doc — see the next section for
+where it *does* graduate to). **De-dupe on promotion: delete the vault note**
+(promotion is a move-as-PR, not a link — the doc re-enters the merged graph via
+the repo input on the next recompose, so nothing is lost). Never keep a
+divergent copy; don't leave pointer notes either — bridges are memory→code
+only, so a pointer would sit unbridged in the graph. Grounding input for
 `link-doc` is the manifest (`code-manifest.jsonl`), not the wiki.
+
+### Graduating memory → the global tier (`/ingest-principles`)
+The repo-doc graduation above is a **move** because there's exactly one
+destination. Project → global is different: **many projects can independently
+land on the same rule**, so generalizing one has to be extractive, not a move
+— the project's own `decisions/`/`notes/` entry stays (it still carries
+project-specific context worth keeping), and `/ingest-principles` writes a
+**derived** note into `memory/global/` that cites it via `sources:`. Run on
+demand, not from `/save-memory` — "is this general?" rarely changes answer
+session-to-session, so judging it every save would pay repeated cost for no
+new signal. Two dedup checks before treating anything as new: is it already
+cited by an existing `global/` note (already ingested), and is it already
+codified in *this* file (already resident — don't duplicate the always-loaded
+config into the retrieved tier). See `skills/ingest-principles/SKILL.md`.
 
 ### When to rebuild
 - Repo graph: `graphify update .` (per-commit, cheap).
@@ -219,7 +242,9 @@ memory→code only, so a pointer would sit unbridged in the graph. Grounding inp
   (small, cheap; semantic cache keyed on doc content).
 - Merged graph: re-compose whenever either input changed — at `/save-memory` (re-link)
   and via the staleness guard (code re-base).
-- Global tier: `merge-graphs` over the memory graphs + `global/`, on demand only.
+- `global/` content: `/ingest-principles`, on demand only (not per save).
+- Global tier: `merge-graphs` over the memory graphs + `global/`, on demand only —
+  after `global/` content changes, not on some fixed schedule.
 - Graphs are persistent — no need to rebuild every session.
 
 ### Do NOT
@@ -232,3 +257,6 @@ memory→code only, so a pointer would sit unbridged in the graph. Grounding inp
 - Don't use `graphify update` on a memory/notes directory — it's unconditionally
   AST-only, exits 0 even there, and silently downgrades a semantic doc graph to
   a structural one. `update` is for the repo (code) graph only.
+- Don't run `/ingest-principles` from `/save-memory` — keep it on-demand; see
+  "Graduating memory → the global tier" above for why.
+- Don't duplicate a principle into `global/` that's already resident in this file.

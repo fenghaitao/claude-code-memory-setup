@@ -48,7 +48,13 @@ Per project, **three graph artifacts** — two extracted inputs, one composed ou
 
 Plus one **global tier** (`~/vault/memory/graphify-out/graph.json`): code-free *by
 construction* — composed (`merge-graphs`) from the per-project memory graphs +
-`global/`. For cross-project prior-art only.
+`global/`. For cross-project prior-art only. `merge-graphs` is a mechanical,
+no-LLM union (breadth, no synthesis); `global/` is the curated half, written by
+**`/ingest-principles`** (on demand, not per save) — it reads every project's
+`decisions/`+`notes/`, judges which generalize across projects, and writes one
+note per principle *citing* every project that evidences it via `sources:`,
+never moving the source (unlike repo-doc promotion, many projects can
+independently land on the same rule).
 
 ### How a question is answered
 
@@ -96,6 +102,7 @@ scripts/
 skills/
 ├── save-memory/         # /save-memory — persist a session into the memory layer
 ├── ingest-session/      # /ingest-session — distill a transcript into decisions/notes
+├── ingest-principles/   # /ingest-principles — generalize project notes into memory/global/
 ├── load-memory/         # /load-memory — reload a project's memory
 └── obsidian-cli/        # vendored Obsidian CLI skill (fresh-machine fallback)
 vault/
@@ -143,7 +150,7 @@ structure or `.graphifyignore`.
 ```
 ~/vault/memory/
 ├── graphify-out/                        GLOBAL tier (composed, code-free)
-├── global/                              cross-project durable notes        ✓ graphed
+├── global/                              cross-project principles (/ingest-principles) ✓ graphed
 └── projects/<project>/
     ├── decisions/                       ADRs, why-X-over-Y                 ✓ graphed → bridged to code
     ├── notes/                           permanent / concept notes          ✓ graphed → bridged to code
@@ -176,6 +183,19 @@ Run at the end of a session (context still warm). `/save-memory`:
   `merged.json`, and re-exports the briefings;
 - flags any *durable, repo-specific* decision as a candidate to graduate into a repo
   doc (see promotion below).
+
+### `/ingest-principles` — generalize project notes into the global tier
+
+Run on demand, separately — **not** part of `/save-memory` ("is this general?"
+rarely changes answer session-to-session, so judging it every save buys nothing).
+Reads every project's `decisions/`+`notes/`, judges which apply regardless of
+which project you're in (not just where discovered — a bug in shared tooling
+counts even if found in one repo), and writes one `memory/global/` note per
+principle *citing* every project that evidences it via `sources:`. Unlike repo-doc
+promotion this never deletes the source: many projects can independently land on
+the same rule. Skips anything already cited by an existing global note, or already
+codified in `global-CLAUDE.md` itself (don't duplicate resident config into the
+retrieved tier).
 
 ### `/load-memory` — reload a project's memory
 
